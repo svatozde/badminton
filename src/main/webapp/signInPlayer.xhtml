@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Student</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
+            <ui:param name="pageTitle" value="#{msgs.student_edit_title}" />
+            <ui:define name="content">
+                <h1>Student</h1>
+                <h:form>
+                    <h:panelGrid columns="3" columnClasses="dataLabel,,">
+                        <h:outputText value="#{msgs.username}:" />
+                        <h:inputText value="#{player.player.username}" id="un" label="#{msgs.username}" required="true" requiredMessage="#{msgs.required_message}">
+                            <f:validateLength minimum="2"/>
+                        </h:inputText>
+                        <h:message for="un" errorClass="errorRequired"/>
+
+                        <h:outputText value="#{msgs.password}:" rendered="#{students.student.id == null}"/>
+                        <h:inputSecret value="#{player.player.password}" id="pw" label="#{msgs.password}" required="true" requiredMessage="#{msgs.required_message}" rendered="#{students.student.id == null}"/>
+                        <h:message for="pw" errorClass="errorRequired" rendered="#{students.student.id == null}"/>
+
+                        <h:outputText value="#{msgs.firstname}:" />
+                        <h:inputText value="#{player.player.name}" id="fn" label="#{msgs.firstname}" required="true" requiredMessage="#{msgs.required_message}">
+                            <f:validateLength minimum="2"/>
+                        </h:inputText>
+                        <h:message for="fn" errorClass="errorRequired"/>
+                        
+
+                        <h:outputText value="#{msgs.surname}:" />
+                        <h:inputText value="#{player.player.surname}" id="sn" label="#{msgs.surname}" required="true" requiredMessage="#{msgs.required_message}" validatorMessage="#{msgs.wrong_length}">
+                            <f:validateLength minimum="2" />
+                        </h:inputText>
+                       
+                        
+                        
+                        <h:message for="sn" errorClass="errorRequired"/>
+
+                    </h:panelGrid>
+                    <h:commandButton type="submit" value="#{msgs.save}" action="#{player.save()}"/>
+                    <h:messages globalOnly="true"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

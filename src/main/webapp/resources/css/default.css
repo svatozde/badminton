@@ -1,0 +1,172 @@
+body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px 0px 15px 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+a:link, a:visited {
+  color: #045491;
+  text-decoration: underline;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #D20005;
+}
+
+table {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+table td {
+    vertical-align: top;
+}
+
+.dataTable {
+    background-color: #E9E9E9;
+    border-collapse: collapse;
+    border: 1px solid #036FAB;
+    min-width: 100%;
+}
+
+.dataTable td {
+    padding: 2px 5px 2px 5px;
+    border: 1px solid #036FAB;
+    text-align: center ;
+}
+
+.dataTable th {
+    color: #045491;
+    padding: 2px 5px 2px 5px;
+    background-color: #f4f4f4;
+}
+
+.innerDataTable {
+    margin: 0px;
+}
+
+table caption {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    color: #045491;
+    font-size: large;
+}
+.innerDataTable td {
+    border: 0px;
+}
+
+.dataLabellogin {
+    color: #045491;
+    font-weight: bold;
+    text-align: right;
+    max-width: 45%;
+}
+
+.inputsCol {
+    text-align: right;
+    width: 200px;
+}
+
+select {
+    width: 230px;
+}
+
+.errorRequired {
+    color: #D20005;
+}
+
+.table{
+    height: 30px;
+    width: 90px;
+    border-color:  #045491;
+    border-width: 2; 
+    border-style: solid;
+    text-align: center;
+    font: monospace;
+    margin: 0;
+}
+.tableCell{
+    
+    
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+}
+
+
+.content {
+    width: 100%;
+    display: block;
+}
+
+.card {
+    width: 45%;
+    float: left; 
+    margin-left: 25px;
+}
+
+.playerMatchCard{
+    min-width: 65%;
+    margin-left: 1%;
+    margin-right: 1%;
+    border: solid 1px #E9E9E9;
+    float: left;
+}
+
+.proposalcard{
+    min-width: 42%;
+    float:left;
+    border: solid 1px #E9E9E9;
+}
+
+.playerCard{
+    min-width:15%;
+    float: left;
+    border: solid 1px #E9E9E9;
+    
+}
+
+.matchMiddle{
+   
+    margin-left: 32%;
+    border: solid 1px #E9E9E9;
+   
+    
+}
+
+.scoreDataTable{
+    background-color: #E9E9E9;
+    border-collapse: collapse;
+    border: 1px solid #036FAB;
+    min-width: 40%;
+    
+}
+
+
+.scoreDataTable td {
+    padding: 2px 5px 2px 5px;
+    border: 1px solid #036FAB;
+    text-align: center ;
+}
+
+.scoreDataTable th {
+    color: #045491;
+    padding: 2px 5px 2px 5px;
+    background-color: #f4f4f4;
+}

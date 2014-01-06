@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+    <h:head>
+        <title>KOS</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
+            <ui:param name="pageTitle" value="#{msgs.students}" />
+            <ui:define name="content">
+                <h:form>
+                    <h:dataTable value="#{leagueList.allLeagues}" var="item" styleClass="dataTable">
+                        <f:facet name="caption">
+                            <h:outputText value="#{msgs.list_students_caption}"/>
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msgs.leagueName}"/>
+                            </f:facet>
+                            <h:commandLink action="#{leagueList.leagueDetail(item)}" value="#{item.name}" />
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="#{msgs.enrollin}" action="#{leagueList.enroll(item)}" />
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="#{msgs.start}" action="#{leagueList.startLeague(item)}" />
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages />
+                </h:form>
+                <h:form>
+                    <h:dataTable value="#{leagueList.enroledLeagues}" var="item" styleClass="dataTable">
+                        <f:facet name="caption">
+                            <h:outputText value="#{msgs.enrolled_in}"/>
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msgs.leagueName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages />
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

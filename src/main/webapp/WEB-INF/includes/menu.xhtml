@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Menu</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <sec:isAuthenticated>
+                <h:outputText value="#{login.loginName}" rendered="#{login.loginName != null}" />
+            </sec:isAuthenticated>
+            <sec:ifNotGranted roles="ROLE_PLAYER,ROLE_ADMIN" >
+                <form action="static/j_spring_security_check" method="post">
+                    <h:panelGrid columns="2" columnClasses="dataLabellogin,dataLabellogin,">
+                        <h:outputText value="Login:" />
+                        <input type="text" name="j_username" style="width: 90px;"/>
+                         <h:outputText value="Password:" />
+                         <input type="password" name="j_password" style="width: 90px;"/>
+                    </h:panelGrid>
+                    <input type="submit" value="login" />
+                </form>
+            </sec:ifNotGranted>
+            <ul>
+                <sec:isAuthenticated>
+                    <li><h:outputLink value="#{facesContext.externalContext.requestContextPath}/static/j_spring_security_logout">Logout</h:outputLink></li>
+                    <li><h:link outcome="place" value="#{msgs.placeCreate}" /></li>
+                    <li><h:link outcome="league" value="#{msgs.leagueCreate}" /></li>
+                    <li><h:link outcome="leagues" value="#{msgs.leagues}" /></li>
+                </sec:isAuthenticated>
+                <sec:ifNotGranted roles="ROLE_PLAYER,ROLE_ADMIN" >
+                    <li><h:link outcome="signin" value="#{msgs.signin}" /></li>
+                </sec:ifNotGranted>          
+            </ul>
+            <h:form>
+                <h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+                                 valueChangeListener="#{language.countryLocaleCodeChanged}" style="width:100px">
+                    <f:selectItems value="#{language.countriesInMap}" /> 
+                </h:selectOneMenu>
+            </h:form>
+
+
+        </ui:composition>
+    </h:body>
+</html>
+

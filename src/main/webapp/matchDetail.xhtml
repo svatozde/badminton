@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>#{msgs.matchDetail}</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
+            <ui:param name="pageTitle" value="#{msgs.matchDetail}" />
+            <ui:define name="content">
+
+
+
+                <h1><h:outputText value="#{msgs.matchDetail}"/></h1>
+
+
+
+                <div class="content">
+                    <div id="p1" class="playerCard">
+                        <h:panelGrid columns="2" columnClasses="dataLabel,">
+                            <f:facet name="caption">
+                                <h:outputText value="#{msgs.player1}"/>                                      
+                            </f:facet>
+                            <h:outputText value="#{msgs.firstname}"/>
+                            <h:outputText value="#{leagueList.currentMatch.player1.name}"/>
+                            <h:outputText value="#{msgs.surname}"/>
+                            <h:outputText value="#{leagueList.currentMatch.player1.surname}"/>
+                            <h:outputText value="#{msgs.birthnumber}"/>
+                            <h:outputText value="#{leagueList.currentMatch.player1.dateOfBirth}"/>                          
+                        </h:panelGrid>
+                    </div>
+                    <div id="middle" class="playerMatchCard">
+                        <c:if test="#{leagueList.matchAgerrd}">
+                            <center>
+                                <h:form>
+                                    <h:dataTable id="sets" value="#{leagueList.currentMatch.sets}" var="item"  styleClass="scoreDataTable">
+                                        <h:column>
+                                            <f:facet name = "header">
+                                                <h:outputText value="#{msgs.setNum}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.number}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name = "header">
+                                                <h:outputText value="#{msgs.player1}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.score1}" rendered="#{not item.editable}"/>
+                                            <h:inputText value="#{item.score1}" rendered="#{item.editable}"/>
+                                            <f:facet name = "footer">
+                                                <h:inputText value="#{leagueList.set.score1}" rendered="#{not leagueList.edit}"/>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name = "header">
+                                                <h:outputText value="#{msgs.player2}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.score2}" rendered="#{not item.editable}"/>
+                                            <h:inputText value="#{item.score2}" rendered="#{item.editable}"/>
+                                            <f:facet name = "footer">
+                                                <h:inputText value="#{leagueList.set.score2}" rendered="#{not leagueList.edit}"/>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandButton value="#{msgs.edit}" action="#{leagueList.setEditable(item)}" rendered="#{not item.editable}"/>
+                                            <h:commandButton value="#{msgs.save}" action="#{leagueList.update(item)}" rendered="#{item.editable}"/>
+                                            <f:facet name="footer">
+                                                <h:commandButton value="#{msgs.add}" action="#{leagueList.addSet()}" rendered="#{not leagueList.edit}"/>
+                                            </f:facet>
+                                        </h:column>                         
+                                    </h:dataTable>
+                                </h:form>
+                                <h:panelGrid columns="2" columnClasses="dataLabel,">
+                                    <f:facet name="caption">
+                                        <h:outputText value="#{msgs.matchAgreed}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{msgs.acceptedPlace}"/>
+                                    <h:outputText value="#{leagueList.agreedProposal.place.name}"/>
+                                    <h:outputText value="#{msgs.acceptedPlaceAdd}"/>
+                                    <h:outputText value="#{leagueList.agreedProposal.place.adress}"/>
+                                    <h:outputText value="#{msgs.acceptedDate}"/>
+                                    <h:outputText value="#{leagueList.agreedProposal.propDate}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeStyle="short" />
+                                    </h:outputText>
+                                </h:panelGrid>
+                            </center>
+                        </c:if>
+                        <c:if test="#{leagueList.checkIfCanPropose()}">
+                            <div class="proposalcard">
+                                <h:form>
+                                    <rich:dataTable value="#{leagueList.currentMatch.proposals1}" var="item" styleClass="dataTable">
+                                        <f:facet name="caption">
+                                            <h:outputText value="#{msgs.proposals}"/>
+                                        </f:facet>
+                                        <rich:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#{msgs.placeName}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.place.name}"/>
+                                            <f:facet name="footer" rendered="#{leagueList.player1}">
+                                                <h:selectOneMenu id="place2"  value="#{leagueList.proposal.place}"  converter="placeConv" validatorMessage="#{msgs.wrong_length}" rendered="#{leagueList.player1}">
+                                                    <f:selectItems value="#{leagueList.allPlaces}"/>
+                                                </h:selectOneMenu>
+                                            </f:facet>
+                                        </rich:column>
+                                        <rich:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#{msgs.proposalDate}">
+                                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeStyle="short" />
+                                                </h:outputText>
+                                            </f:facet>
+                                            <h:outputText value="#{item.propDate}"/>
+                                            <f:facet name="footer" rendered="#{leagueList.player1}">
+                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player1}" datePattern="dd.MM HH:mm" validator="matchDateValidator" />
+                                            </f:facet>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:commandButton value="accept" rendered="#{leagueList.player2}" action="#{leagueList.agreeProposal(item)}"/>
+                                            <f:facet name="footer" rendered="#{leagueList.player1}">
+                                                <h:commandButton type="submit" value="create" rendered="#{leagueList.player1}" action="#{leagueList.createProposal1()}" />
+                                            </f:facet>
+                                        </rich:column> 
+                                    </rich:dataTable>
+                                    <h:messages />
+                                </h:form>
+                            </div>
+                            <div class="proposalcard">
+                                <h:form>
+                                    <rich:dataTable value="#{leagueList.currentMatch.proposals2}" var="item" styleClass="dataTable">
+                                        <f:facet name="caption">
+                                            <h:outputText value="#{msgs.proposals}"/>
+                                        </f:facet>
+                                        <rich:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#{msgs.placeName}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.place.name}"/>
+                                            <f:facet name="footer" >
+                                                <h:selectOneMenu id="place2"  value="#{leagueList.proposal.place}"  converter="placeConv" validatorMessage="#{msgs.wrong_length}" rendered="#{leagueList.player2}">
+                                                    <f:selectItems value="#{leagueList.allPlaces}"/>
+                                                </h:selectOneMenu>
+                                            </f:facet>
+                                        </rich:column>
+                                        <rich:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#{msgs.proposalDate}">
+                                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeStyle="short" />
+                                                </h:outputText>
+                                            </f:facet>
+                                            <h:outputText value="#{item.propDate}"/>
+                                            <f:facet name="footer">
+                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player2}" datePattern="dd.MM HH:mm" validator="matchDateValidator"/>
+                                            </f:facet>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:commandButton value="accept" rendered="#{leagueList.player1}" action="#{leagueList.agreeProposal(item)}"/>
+                                            <f:facet name="footer" rendered="#{leagueList.player2}">
+                                                <h:commandButton type="submit" value="create" rendered="#{leagueList.player2}" action="#{leagueList.createProposal2()}" />
+                                            </f:facet>
+                                        </rich:column> 
+                                    </rich:dataTable>
+                                    <h:messages />
+                                </h:form>
+                            </div>
+                        </c:if>
+                    </div>
+
+                    <div id="p2" class="playerCard">
+                        <h:panelGrid columns="2" columnClasses="dataLabel,">
+                            <f:facet name="caption">
+                                <h:outputText value="#{msgs.player2}"/>                                      
+                            </f:facet>
+                            <h:outputText value="#{msgs.firstname}"/>
+                            <h:outputText value="#{leagueList.currentMatch.player2.name}"/>
+                            <h:outputText value="#{msgs.surname}"/>
+                            <h:outputText value="#{leagueList.currentMatch.player2.surname}"/>
+                            <h:outputText value="#{msgs.birthnumber}"/>
+                            <h:outputText value="#{leagueList.currentMatch.player2.dateOfBirth}"/>                          
+                        </h:panelGrid>
+                    </div>
+                </div>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

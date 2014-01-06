@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>KOS</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
+            <ui:param name="pageTitle" value="#{msgs.students}" />
+            <ui:define name="content">
+                <h:form>
+                    <TABLE class="table">
+                        <tbody>
+                            <tr>
+                                <td class="tableCell">
+                                    x
+                                </td>   
+                                <ui:repeat value="#{leagueList.currentLeagueMatches.players}" var="p">
+                                    <td class="tableCell">
+                                        #{p.getName()}<br/>
+                                        #{(p.getSurname())}    
+                                    </td>
+                                </ui:repeat>
+                            </tr>
+                            <ui:repeat value="#{leagueList.currentLeagueMatches.matches}" var="row" varStatus="i">
+                                <TR>
+                                    <td class="tableCell">
+                                        #{leagueList.currentLeagueMatches.players[i.index].getName()}  #{leagueList.currentLeagueMatches.players[i.index].getSurname()} 
+                                    </td>
+                                    <ui:repeat value="#{row}" var="m">
+                                        <td class="tableCell">
+                                            <h:commandLink action="#{leagueList.showMatchDetail(m)}">
+                                                #{m.getScore()}
+                                            </h:commandLink>
+                                        </td>
+                                    </ui:repeat>
+                                </TR>
+                            </ui:repeat>  
+                        </tbody>
+                    </TABLE>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
