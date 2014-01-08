@@ -13,7 +13,7 @@
             <sec:isAuthenticated>
                 <h:outputText value="#{login.loginName}" rendered="#{login.loginName != null}" />
             </sec:isAuthenticated>
-            <sec:ifNotGranted roles="ROLE_PLAYER,ROLE_ADMIN" >
+            <sec:ifNotGranted roles="ROLE_PLAYER" >
                 <form action="static/j_spring_security_check" method="post">
                     <h:panelGrid columns="2" columnClasses="dataLabellogin,dataLabellogin,">
                         <h:outputText value="Login:" />
@@ -31,7 +31,7 @@
                     <li><h:link outcome="league" value="#{msgs.leagueCreate}" /></li>
                     <li><h:link outcome="leagues" value="#{msgs.leagues}" /></li>
                 </sec:isAuthenticated>
-                <sec:ifNotGranted roles="ROLE_PLAYER,ROLE_ADMIN" >
+                <sec:ifNotGranted roles="ROLE_PLAYER" >
                     <li><h:link outcome="signin" value="#{msgs.signin}" /></li>
                 </sec:ifNotGranted>          
             </ul>
