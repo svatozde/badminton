@@ -6,6 +6,11 @@
 
 package cz.cvut.kbss.wpa.dto;
 
+import cz.cvut.kbss.wpa.provider.HashProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+
 /**
  *
  * @author jan
@@ -14,6 +19,9 @@ public class UserDTO extends AbstractDTO{
     
     protected String username;
     protected String password;
+    
+     @Autowired
+    private transient HashProvider hashProvider;
 
     public UserDTO(Long id, String username, String password) {
         super(id);
@@ -40,6 +48,30 @@ public class UserDTO extends AbstractDTO{
     public void setPassword(String password) {
         this.password = password;
     }
+    
+     public boolean hasPassword(String password){
+        return hashProvider.computeHash(password).equals(this.password);
+    }
+     
+     /**
+     * @return the provider
+     */
+    public HashProvider getProvider() {
+        return hashProvider;
+    }
+
+    /**
+     * @param provider the provider to set
+     */
+    public void setProvider(HashProvider provider) {
+        this.hashProvider = provider;
+    }
+    
+    
+     public GrantedAuthority getGrantedAuthority()
+     {
+         return new GrantedAuthorityImpl("ROLE_USER");
+     }
     
     
 }

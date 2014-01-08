@@ -8,6 +8,8 @@ package cz.cvut.kbss.wpa.dto;
 
 import java.util.Date;
 import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 
 /**
  *
@@ -93,6 +95,11 @@ public class PlayerDTO extends UserDTO {
 
     public void setEnrolls(List<EnrollDTO> enrolls) {
         this.enrolls = enrolls;
+    }
+    
+     @Override
+    public GrantedAuthority getGrantedAuthority() {
+        return new GrantedAuthorityImpl("ROLE_PLAYER");
     }
     
 }
