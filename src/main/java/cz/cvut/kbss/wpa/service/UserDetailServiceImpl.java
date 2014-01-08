@@ -33,33 +33,13 @@ public class UserDetailServiceImpl implements UserDetailsService, Serializable {
     @Transactional
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
         UserDTO dto;
-        try {
-            dto = userService.getUserByName(string);
-        } catch (Exception ex) {
-            throw new UsernameNotFoundException("Username " + string + " does not exist");//TODO add transaltion
-        }
+        dto = userService.getUserByName(string);
         if (dto == null) {
             throw new UsernameNotFoundException("Username " + string + " does not exist");//TODO add transaltion
         }
 
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        if (dto instanceof PlayerDTO) {
-            authorities.add(new GrantedAuthority() {
-
-                public String getAuthority() {
-                    return "ROLE_PLAYER";
-                }
-            });
-        }
-
-        if(dto instanceof PlayerDTO){
-        authorities.add(new GrantedAuthority() {
-
-            public String getAuthority() {
-                return "ROLE_ADMIN";
-            }
-        });
-        }
+        authorities.add(dto.getGrantedAuthority());
         CurrentUserDetails curr = new CurrentUserDetails(authorities);
         curr.setUserDto(dto);
         return curr;
