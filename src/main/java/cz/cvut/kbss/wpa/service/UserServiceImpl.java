@@ -13,6 +13,7 @@ import cz.cvut.kbss.wpa.model.Admin;
 import cz.cvut.kbss.wpa.model.Player;
 import cz.cvut.kbss.wpa.model.User;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,13 @@ public class UserServiceImpl implements UserService, Serializable {
     private GenericDAOIface genericDAOIface;
 
     public UserDTO getUserByName(String name) {
-       User u = genericDAOIface.getByPropertyUnique("username", name, User.class);
-       return map(u);
+       List<User> users = genericDAOIface.getByProperty("username", name, User.class);
+       if (users.isEmpty()) {
+           return null;
+       }
+       else {
+           return map(users.get(0));
+       }
     }
     
     private UserDTO map(User u){
@@ -43,8 +49,8 @@ public class UserServiceImpl implements UserService, Serializable {
            dto = pdto;
         }else{
             dto = new UserDTO();
-        }
-        
+    }
+
         dto.setPassword(u.getPassword());
         dto.setUsername(u.getUsername());
         dto.setId(u.getId());
