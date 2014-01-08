@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Student</title>
@@ -15,7 +16,7 @@
                 <h:form>
                     <h:panelGrid columns="3" columnClasses="dataLabel,,">
                         <h:outputText value="#{msgs.username}:" />
-                        <h:inputText value="#{player.player.username}" id="un" label="#{msgs.username}" required="true" requiredMessage="#{msgs.required_message}">
+                        <h:inputText value="#{player.player.username}" id="un" label="#{msgs.username}" required="true" requiredMessage="#{msgs.required_message}" validator="#{player.checkUniqueUsername}">
                             <f:validateLength minimum="2"/>
                         </h:inputText>
                         <h:message for="un" errorClass="errorRequired"/>
@@ -35,10 +36,25 @@
                         <h:inputText value="#{player.player.surname}" id="sn" label="#{msgs.surname}" required="true" requiredMessage="#{msgs.required_message}" validatorMessage="#{msgs.wrong_length}">
                             <f:validateLength minimum="2" />
                         </h:inputText>
-                       
-                        
-                        
                         <h:message for="sn" errorClass="errorRequired"/>
+                        
+                        <h:outputText value="#{msgs.weight}:" />
+                        <h:inputText value="#{player.player.weigth}" id="weigth" label="#{msgs.weight}" required="true" requiredMessage="#{msgs.required_message}" validatorMessage="#{msgs.wrong_weigth}">
+                            <f:validateLength minimum="2" />
+                        </h:inputText>
+                        <h:message for="weigth" errorClass="errorRequired"/>
+                            
+                        <h:outputText value="#{msgs.height}:" />
+                        <h:inputText value="#{player.player.height}" id="height" label="#{msgs.height}" required="true" requiredMessage="#{msgs.required_message}" validatorMessage="#{msgs.wrong_height}">
+                            <f:validateLength minimum="2" />
+                        </h:inputText>
+                        <h:message for="height" errorClass="errorRequired"/>
+                        
+                        <h:outputText value="#{msgs.birthDate}"/>
+                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" popup="true" rendered="true" datePattern="dd.MM HH:mm" validator="matchDateValidator" />
+                        <h:message for="height" errorClass="errorRequired"/>
+                        
+                        
 
                     </h:panelGrid>
                     <h:commandButton type="submit" value="#{msgs.save}" action="#{player.save()}"/>
