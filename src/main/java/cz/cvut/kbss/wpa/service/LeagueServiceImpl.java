@@ -43,6 +43,13 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
     @Autowired
     private GenericDAOIface genericDAOIface;
 
+    public List<LeagueDTO> getLeaguesNotStarted() {
+        Map<String, Object> m = new HashMap<String, Object>();
+        m.put("today", new Date());
+        List<League> leagues = genericDAOIface.getByNamedQuery(League.Q_GET_ENROLLED_LEAGUES, m, League.class);
+        return remapLegues(leagues);
+    }
+
     public void createLeague(LeagueDTO league) {
         League l = new League();
         l.setName(league.getName());

@@ -18,6 +18,13 @@
     </properties>
 
     <dependencies>
+        
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+		<version>1.8.6</version>
+        </dependency>
+        
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -343,8 +350,8 @@
             <url>http://repository.springsource.com/maven/bundles/release</url>
         </repository>
         <repository>
-           <id>EclipseLink</id>
-           <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+            <id>EclipseLink</id>
+            <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
         </repository>        
         <repository>
             <id>org.springframework.security.taglibs.facelets</id>

@@ -1,19 +1,19 @@
 
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:webflow="http://www.springframework.org/schema/webflow-config" 
-    xmlns:faces="http://www.springframework.org/schema/faces" 
-    xmlns:p="http://www.springframework.org/schema/p" 
-    xmlns:context="http://www.springframework.org/schema/context" 
-    xmlns:tx="http://www.springframework.org/schema/tx" 
-    xmlns:aop="http://www.springframework.org/schema/aop" 
-    xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config" 
+       xmlns:faces="http://www.springframework.org/schema/faces" 
+       xmlns:p="http://www.springframework.org/schema/p" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
         http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd" 
-    default-autowire="byType">
+       default-autowire="byType">
         
     <!-- Pro konfiguraci Spring beans budou pouzity take anotace -->
     <context:annotation-config />      
@@ -44,7 +44,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-            <!--bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter"-->
+                <!--bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter"-->
                 <property name="databasePlatform" value="${jpa.platform}"/>
                 <property name="generateDdl" value="true"/>
                 <property name="showSql" value="false"/>            
@@ -59,4 +59,44 @@
     
     <!-- Podpora deklarativni demarkace transakci - anotace @Transactional-->
     <tx:annotation-driven transaction-manager="txManager" /> 
+    
+<!--    
+    
+    <bean name="startLeagueJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="cz.cvut.kbss.wpa.back.LeagueStaringBean" />
+    </bean>
+    
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+
+        <property name="jobDetail" ref="startLeagueJob" />
+        <property name="cronExpression" value="0/5 * * * * ?" />
+
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.scheduler.instanceName">MyScheduler</prop>
+                <prop key="org.quartz.scheduler.instanceId">1</prop>
+                <prop key="org.quartz.scheduler.rmi.export">false</prop>
+                <prop key="org.quartz.scheduler.rmi.proxy">false</prop>
+                <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+                <prop key="org.quartz.threadPool.threadCount">3</prop>
+                <prop key="org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</prop>
+                <prop key="org.quartz.jobStore.isClustered">false</prop>
+                <prop key="org.quartz.jobStore.useProperties">true</prop>
+            </props>
+        </property>
+        <property name="jobDetails">
+            <list>
+                <ref bean="startLeagueJob" />
+            </list>
+        </property>
+
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+    </bean>-->
 </beans>

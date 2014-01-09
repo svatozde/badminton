@@ -37,6 +37,7 @@
                     <div id="middle" class="playerMatchCard">
                         <c:if test="#{leagueList.matchAgerrd}">
                             <center>
+                                <center><h1>#{leagueList.currentMatch.score}</h1></center>
                                 <h:form>
                                     <h:dataTable id="sets" value="#{leagueList.currentMatch.sets}" var="item"  styleClass="scoreDataTable">
                                         <h:column>
@@ -50,9 +51,9 @@
                                                 <h:outputText value="#{msgs.player1}"/>
                                             </f:facet>
                                             <h:outputText value="#{item.score1}" rendered="#{not item.editable}"/>
-                                            <h:inputText value="#{item.score1}" rendered="#{item.editable}"/>
+                                            <h:inputText value="#{item.score1}" rendered="#{item.editable}" styleClass="tableInput"/>
                                             <f:facet name = "footer">
-                                                <h:inputText value="#{leagueList.set.score1}" rendered="#{not leagueList.edit}"/>
+                                                <h:inputText value="#{leagueList.set.score1}" rendered="#{not leagueList.edit and leagueList.checkIfCanAddScore()}" styleClass="tableInput"/>
                                             </f:facet>
                                         </h:column>
                                         <h:column>
@@ -60,12 +61,12 @@
                                                 <h:outputText value="#{msgs.player2}"/>
                                             </f:facet>
                                             <h:outputText value="#{item.score2}" rendered="#{not item.editable}"/>
-                                            <h:inputText value="#{item.score2}" rendered="#{item.editable}"/>
+                                            <h:inputText value="#{item.score2}" rendered="#{item.editable}" styleClass="tableInput"/>
                                             <f:facet name = "footer">
-                                                <h:inputText value="#{leagueList.set.score2}" rendered="#{not leagueList.edit}"/>
+                                                <h:inputText value="#{leagueList.set.score2}" rendered="#{not leagueList.edit and leagueList.checkIfCanAddScore()}" styleClass="tableInput"/>
                                             </f:facet>
                                         </h:column>
-                                        <h:column>
+                                        <h:column rendered="#{leagueList.checkIfCanAddScore()}">
                                             <h:commandButton value="#{msgs.edit}" action="#{leagueList.setEditable(item)}" rendered="#{not item.editable}"/>
                                             <h:commandButton value="#{msgs.save}" action="#{leagueList.update(item)}" rendered="#{item.editable}"/>
                                             <f:facet name="footer">
@@ -74,6 +75,7 @@
                                         </h:column>                         
                                     </h:dataTable>
                                 </h:form>
+
                                 <h:panelGrid columns="2" columnClasses="dataLabel,">
                                     <f:facet name="caption">
                                         <h:outputText value="#{msgs.matchAgreed}"/>
@@ -115,7 +117,7 @@
                                             </f:facet>
                                             <h:outputText value="#{item.propDate}"/>
                                             <f:facet name="footer" rendered="#{leagueList.player1}">
-                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player1}" datePattern="dd.MM HH:mm" validator="matchDateValidator" />
+                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player1}" datePattern="dd.MM.yyyy HH:mm" validator="matchDateValidator" />
                                             </f:facet>
                                         </rich:column>
                                         <rich:column>
@@ -153,7 +155,7 @@
                                             </f:facet>
                                             <h:outputText value="#{item.propDate}"/>
                                             <f:facet name="footer">
-                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player2}" datePattern="dd.MM HH:mm" validator="matchDateValidator"/>
+                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player2}" datePattern="dd.MM.yyyy HH:mm" validator="matchDateValidator"/>
                                             </f:facet>
                                         </rich:column>
                                         <rich:column>

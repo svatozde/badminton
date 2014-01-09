@@ -26,11 +26,13 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries({
        @NamedQuery(name = League.Q_GET_ENROLLED_LEAGUES, query = "SELECT l FROM League l JOIN l.enrolls e WHERE e.player.id = :player"),
-       @NamedQuery(name = League.Q_GET_ENROLED_PLAYERS, query="SELECT p FROM Player p JOIN p.enrolls e WHERE e.league.id = :league" )})
+       @NamedQuery(name = League.Q_GET_ENROLED_PLAYERS, query="SELECT p FROM Player p JOIN p.enrolls e WHERE e.league.id = :league" ),
+       @NamedQuery(name = League.Q_GET_LEAGUES_NOT_STARTED, query = "SELECT l FROM League l where COUNT(l.matches)=0 AND l.leagueStart  < :today")})
 public class League extends AbstractEntity {
 
     public static final String Q_GET_ENROLLED_LEAGUES = "Q_GET_ENROLLED_LEAGUES";
     public static final String Q_GET_ENROLED_PLAYERS = "Q_GET_ENROLED_PLAYERS";
+    public static final String Q_GET_LEAGUES_NOT_STARTED = "Q_GET_LEAGUES_NOT_STARTED";
     
     @OneToMany(mappedBy = "league")
     private List<Match> matches;
@@ -50,7 +52,7 @@ public class League extends AbstractEntity {
     @Temporal(TemporalType.DATE)
     protected Date leagueEnd;
     
-
+  
     /**
      * @return the matches
      */

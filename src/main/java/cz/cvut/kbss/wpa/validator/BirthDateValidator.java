@@ -19,6 +19,19 @@ public class BirthDateValidator implements Validator {
         Date d = (Date) value;
         if(d.after(new Date()))
             throw new ValidatorException(new FacesMessage(FacesUtil.getMessage("wrongPropDate")));
+       
+        int age =getAge(d);
+        if(age < 5 || age > 100)
+           throw new ValidatorException(new FacesMessage(FacesUtil.getMessage("wrongPropDate")));
+        
     }
+    
+    private int getAge(Date birthDate) {
+	long ageInMillis = new Date().getTime() - birthDate.getTime();
+
+	Date age = new Date(ageInMillis);
+
+	return age.getYear();
+}
 
 }

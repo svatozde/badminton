@@ -51,7 +51,7 @@ public class LeagueListBean implements Serializable {
 
     private SetDTO set;
 
-    public  boolean isEdit() {
+    public boolean isEdit() {
         for (SetDTO s : currentMatch.getSets()) {
             if (s.isEditable()) {
                 return true;
@@ -63,7 +63,7 @@ public class LeagueListBean implements Serializable {
     public void addSet() {
         scoreService.addSet(currentMatch, set);
         set = new SetDTO();
-        set.setNumber(currentMatch.getSets().size()+1);
+        set.setNumber(currentMatch.getSets().size() + 1);
 
     }
 
@@ -75,6 +75,9 @@ public class LeagueListBean implements Serializable {
     }
 
     public void setEditable(SetDTO s) {
+         for (SetDTO ss : currentMatch.getSets()) {
+            ss.setEditable(false);
+        }
         s.setEditable(true);
     }
 
@@ -146,7 +149,7 @@ public class LeagueListBean implements Serializable {
         CurrentUserDetails u = (CurrentUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         proposal.setPlayer((PlayerDTO) u.getUserDto());
         set = new SetDTO();
-        set.setNumber(currentMatch.getSets().size()+1);
+        set.setNumber(currentMatch.getSets().size() + 1);
         for (SetDTO s : currentMatch.getSets()) {
             s.setEditable(false);
         }
@@ -179,7 +182,11 @@ public class LeagueListBean implements Serializable {
         List<ProposalDTO> p = currentMatch.getProposals2();
         return p;
     }
-
+    
+    public boolean checkIfCanAddScore(){
+         return currentMatch.getPlayed() != null && (isPlayer1() || isPlayer2());
+    }
+    
     public boolean checkIfCanPropose() {
         return currentMatch.getPlayed() == null && (isPlayer1() || isPlayer2());
     }
@@ -319,5 +326,19 @@ public class LeagueListBean implements Serializable {
     public void setSet(SetDTO set) {
         this.set = set;
     }
+
+    public String getStyle(Integer i, Integer j) {
+       if(i.equals(j)){
+           return "tableCellDark";
+       }else if ( ((i + j) % 2) == 1){
+           return "tableCellBlue";
+       }
+       else if(((i + j) % 2) == 0){
+           return "tableCellGray";
+       }
+       return "";
+    }
+
+   
 
 }

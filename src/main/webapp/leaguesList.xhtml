@@ -26,9 +26,9 @@
                         <h:column>
                             <h:commandButton value="#{msgs.enrollin}" action="#{leagueList.enroll(item)}" />
                         </h:column>
-                        <h:column>
-                            <h:commandButton value="#{msgs.start}" action="#{leagueList.startLeague(item)}" />
-                        </h:column>
+                            <h:column>
+                                <h:commandButton value="#{msgs.start}" action="#{leagueList.startLeague(item)}" />
+                            </h:column>
                     </h:dataTable>
                     <h:messages />
                 </h:form>
@@ -41,7 +41,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msgs.leagueName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.name}"/>
+                            <h:commandLink action="#{leagueList.leagueDetail(item)}" value="#{item.name}" />
                         </h:column>
                     </h:dataTable>
                     <h:messages />

@@ -24,7 +24,7 @@ public interface LeagueService {
     @Transactional
     public void createLeague(LeagueDTO league);
 
-    @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
+    
     @Transactional
     public void startLeague(LeagueDTO league);
 
@@ -44,6 +44,9 @@ public interface LeagueService {
     @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
     @Transactional
     public LeagueDTO getMatches(LeagueDTO league);
+    
+    @Transactional
+    public List<LeagueDTO> getLeaguesNotStarted();
     
     
     

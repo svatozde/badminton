@@ -89,18 +89,52 @@ select {
 }
 
 .table{
-    height: 30px;
-    width: 90px;
-    border-color:  #045491;
-    border-width: 2; 
-    border-style: solid;
-    text-align: center;
     font: monospace;
+    font-size: larger;
     margin: 0;
 }
-.tableCell{
+
+.table td{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    vertical-align: central;
+    padding: 0px 0px 0px 0px;
+}
+
+
+
+.tableCellGray{
     
+    background-color: #AFAFAF;
+}
+
+.tableCellGray:hover{
     
+    background-color: #dddddd;
+}
+
+.tableCellBlue{
+    background-color: #c2dfef
+    
+}
+
+.tableCellBlue:hover{
+    background-color: #dddddd;
+    
+}
+
+.tableCellDark{
+    background-color: #036fab;
+}
+
+.table a:hover td {
+    background-color: #dddddd;
+}
+
+.tableLink{
+    height: 100%;
+    width:100%;
 }
 
 .wrap {
@@ -160,7 +194,6 @@ select {
 
 
 .scoreDataTable td {
-    padding: 2px 5px 2px 5px;
     border: 1px solid #036FAB;
     text-align: center ;
 }
@@ -170,3 +203,10 @@ select {
     padding: 2px 5px 2px 5px;
     background-color: #f4f4f4;
 }
+
+.tableInput{
+    margin: 0px 0px 0px 0px;
+    width:100%;
+    height: 100%
+}
+
