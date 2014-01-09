@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
     <h:head>
         <title>#{msgs.player_create_title}</title>
     </h:head>
@@ -51,7 +51,7 @@
                         <h:message for="height" errorClass="errorRequired"/>
                         
                         <h:outputText value="#{msgs.birthDate}"/>
-                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" popup="true" rendered="true" datePattern="dd.MM HH:mm" validator="matchDateValidator" />
+                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" popup="true" rendered="true" datePattern="dd.MM HH:mm"/>
                         <h:message for="height" errorClass="errorRequired"/>
                         
                         
