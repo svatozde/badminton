@@ -6,6 +6,8 @@
 
 package cz.cvut.kbss.wpa.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 
@@ -24,8 +26,11 @@ public class AdminDTO extends UserDTO{
     }
     
     @Override
-    public GrantedAuthority getGrantedAuthority() {
-        return new GrantedAuthorityImpl("ROLE_ADMIN");
+    public List<GrantedAuthority> getGrantedAuthorities() {
+        List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+         auth.add(new GrantedAuthorityImpl("ROLE_PLAYER"));
+         auth.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+         return auth;
     }
     
 }
