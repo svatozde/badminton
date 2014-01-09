@@ -6,9 +6,11 @@
 
 package cz.cvut.kbss.wpa.back;
 
+import cz.cvut.kbss.wpa.dto.AdminDTO;
 import cz.cvut.kbss.wpa.dto.PlayerDTO;
 import cz.cvut.kbss.wpa.dto.UserDTO;
 import cz.cvut.kbss.wpa.security.CurrentUserDetails;
+import cz.cvut.kbss.wpa.service.AdminService;
 import cz.cvut.kbss.wpa.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,14 +21,29 @@ import org.springframework.stereotype.Component;
  *
  * @author jan
  */
-@Component("editPlayer")
+@Component("editUser")
 @Scope("request")
-public class EditPlayerBean {
+public class EditUserBean {
     
     @Autowired
     private PlayerService playerService;
     
+    @Autowired
+    private AdminService adminService;
+    
     private PlayerDTO player;
+    
+    private AdminDTO admin;
+    
+    public AdminDTO getAdmin() {
+        if (admin == null) {
+            //load from credential
+            CurrentUserDetails cud = (CurrentUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            admin = (AdminDTO)cud.getUserDto();
+            admin.setPassword("");
+        }
+        return admin;
+    }
 
     public PlayerDTO getPlayer() {
         if (player == null) {
@@ -38,13 +55,18 @@ public class EditPlayerBean {
         return player;
     }
 
-    public void setUser(PlayerDTO player) {
+    public void setPlayer(PlayerDTO player) {
         this.player = player;
     }
     
     public void save()
     {
-        playerService.updatePlayer(player);
+        if (player != null) {
+            playerService.updatePlayer(player);
+        }
+        if (admin != null) {
+            adminService.updateAdmin(admin);
+        }
     }
     
 }

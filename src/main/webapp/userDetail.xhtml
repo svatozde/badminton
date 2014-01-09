@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
     <h:head>
         <title>#{msgs.user_detail_title}</title>
     </h:head>
@@ -14,32 +15,38 @@
                 
                 <h:form>
                     <h:panelGrid columns="2" columnClasses="dataLabel,">
+                        <sec:ifAllGranted roles="ROLE_PLAYER, ROLE_ADMIN">
+                            <h:outputText value="#{msgs.password}:" />
+                            <h:inputSecret value="#{editUser.admin.password}" id="pw" label="#{msgs.password}" required="false" />
+                        </sec:ifAllGranted>
+                        <sec:ifNotGranted roles="ROLE_ADMIN">
                         
-                        <h:outputText value="#{msgs.password}:" />
-                        <h:inputSecret value="#{editPlayer.player.password}" id="pw" label="#{msgs.password}" required="false" />
-                        
-                        <h:outputText value="#{msgs.firstname}:" />
-                        <h:inputText value="#{editPlayer.player.name}" id="fn" label="#{msgs.firstname}" required="false">
-                            <f:validateLength minimum="2"/>
-                        </h:inputText>
-                        
-                        <h:outputText value="#{msgs.surname}:" />
-                        <h:inputText value="#{editPlayer.player.surname}" id="sn" label="#{msgs.surname}" required="false"  validatorMessage="#{msgs.wrong_length}">
-                            <f:validateLength minimum="2" />
-                        </h:inputText>
-                        
-                        <h:outputText value="#{msgs.weight}:" />
-                        <h:inputText value="#{editPlayer.player.weigth}" id="weigth" label="#{msgs.weight}" required="false" validatorMessage="#{msgs.wrong_weigth}">
-                            <f:validateLength minimum="2" />
-                        </h:inputText>
-                            
-                        <h:outputText value="#{msgs.height}:" />
-                        <h:inputText value="#{editPlayer.player.height}" id="height" label="#{msgs.height}" required="false" validatorMessage="#{msgs.wrong_height}">
-                            <f:validateLength minimum="2" />
-                        </h:inputText>
+                            <h:outputText value="#{msgs.password}:" />
+                            <h:inputSecret value="#{editUser.player.password}" id="pw" label="#{msgs.password}" required="false" />
+
+                            <h:outputText value="#{msgs.firstname}:" />
+                            <h:inputText value="#{editUser.player.name}" id="fn" label="#{msgs.firstname}" required="false">
+                                <f:validateLength minimum="2"/>
+                            </h:inputText>
+
+                            <h:outputText value="#{msgs.surname}:" />
+                            <h:inputText value="#{editUser.player.surname}" id="sn" label="#{msgs.surname}" required="false"  validatorMessage="#{msgs.wrong_length}">
+                                <f:validateLength minimum="2" />
+                            </h:inputText>
+
+                            <h:outputText value="#{msgs.weight}:" />
+                            <h:inputText value="#{editUser.player.weigth}" id="weigth" label="#{msgs.weight}" required="false" validatorMessage="#{msgs.wrong_weigth}">
+                                <f:validateLength minimum="2" />
+                            </h:inputText>
+
+                            <h:outputText value="#{msgs.height}:" />
+                            <h:inputText value="#{editUser.player.height}" id="height" label="#{msgs.height}" required="false" validatorMessage="#{msgs.wrong_height}">
+                                <f:validateLength minimum="2" />
+                            </h:inputText>
+                         </sec:ifNotGranted>   
                         
                     </h:panelGrid>
-                    <h:commandButton type="submit" value="#{msgs.save}" action="#{editPlayer.save()}"/>
+                    <h:commandButton type="submit" value="#{msgs.save}" action="#{editUser.save()}"/>
                     <h:messages globalOnly="true"/>
                 </h:form>
             </ui:define>
