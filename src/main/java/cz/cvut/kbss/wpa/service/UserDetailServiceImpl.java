@@ -39,7 +39,7 @@ public class UserDetailServiceImpl implements UserDetailsService, Serializable {
         }
 
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(dto.getGrantedAuthority());
+        authorities.addAll(dto.getGrantedAuthorities());
         CurrentUserDetails curr = new CurrentUserDetails(authorities);
         curr.setUserDto(dto);
         return curr;

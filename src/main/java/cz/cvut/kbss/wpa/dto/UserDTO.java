@@ -7,6 +7,8 @@
 package cz.cvut.kbss.wpa.dto;
 
 import cz.cvut.kbss.wpa.provider.HashProvider;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -68,9 +70,11 @@ public class UserDTO extends AbstractDTO{
     }
     
     
-     public GrantedAuthority getGrantedAuthority()
+     public List<GrantedAuthority> getGrantedAuthorities()
      {
-         return new GrantedAuthorityImpl("ROLE_USER");
+         List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+         auth.add(new GrantedAuthorityImpl("ROLE_USER"));
+         return auth;
      }
     
     

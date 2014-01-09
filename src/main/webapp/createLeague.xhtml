@@ -5,17 +5,17 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Student</title>
+        <title>Vytvoreni Ligy</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
             <ui:param name="pageTitle" value="#{msgs.student_edit_title}" />
             <ui:define name="content">
-                <h1>Student</h1>
+                <h1>Vytvoreni Ligy</h1>
                 <h:form>
                     <h:panelGrid columns="3" columnClasses="dataLabel,,">
                         <h:outputText value="#{msgs.leagueName}:" />
-                        <h:inputText value="#{league.league.name}" id="bn" label="#{msgs.birthnumber}" required="true" disabled="#{students.student.id != null}" validator="birthnumberValidator" />
+                        <h:inputText value="#{league.league.name}" id="bn" required="true" />
                         <h:message for="bn" errorClass="errorRequired"/>
 
                         <h:outputText value="#{msgs.possiblePlaces}:" />
@@ -25,7 +25,6 @@
                         <h:message for="enrolledIn" />
                     </h:panelGrid>
                     <h:commandButton type="submit" value="#{msgs.save}" action="#{league.createLeague()}"/>
-                    <h:commandLink action="students" value="#{msgs.back_student_list}" immediate="true" />
                     <h:messages globalOnly="true"/>
                 </h:form>
             </ui:define>

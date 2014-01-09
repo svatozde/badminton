@@ -3,16 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
     <h:head>
-        <title>Student</title>
+        <title>#{msgs.player_create_title}</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
-            <ui:param name="pageTitle" value="#{msgs.student_edit_title}" />
+            <ui:param name="pageTitle" value="#{msgs.player_create_title}" />
             <ui:define name="content">
-                <h1>Student</h1>
+                <h1>#{msgs.player_create_title}</h1>
                 <h:form>
                     <h:panelGrid columns="3" columnClasses="dataLabel,,">
                         <h:outputText value="#{msgs.username}:" />
@@ -51,7 +51,7 @@
                         <h:message for="height" errorClass="errorRequired"/>
                         
                         <h:outputText value="#{msgs.birthDate}"/>
-                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" popup="true" rendered="true" datePattern="dd.MM HH:mm" validator="matchDateValidator" />
+                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" popup="true" rendered="true" datePattern="dd.MM HH:mm"/>
                         <h:message for="height" errorClass="errorRequired"/>
                         
                         
