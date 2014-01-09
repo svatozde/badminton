@@ -10,7 +10,7 @@
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
-            <ui:param name="pageTitle" value="#{msgs.student_edit_title}" />
+            <ui:param name="pageTitle" value="#{msgs.league_create_title}" />
             <ui:define name="content">
                 <h1>Vytvoreni Ligy</h1>
                 <h:form>
@@ -30,8 +30,8 @@
                         <h:message for="sd" />
                         
                         <h:outputText value="#{msgs.endDate}"/>
-                        <rich:calendar id="sd" value="#{league.league.leagueEnd}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
-                        <h:message for="sd" />
+                        <rich:calendar id="ed" value="#{league.league.leagueEnd}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
+                        <h:message for="ed" />
                        
                     </h:panelGrid>
                     <h:commandButton type="submit" value="#{msgs.save}" action="#{league.createLeague()}"/>
