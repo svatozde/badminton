@@ -226,14 +226,6 @@ public class LeagueListBean implements Serializable {
         return all;
     }
 
-    public List<LeagueDTO> getEnrolledLeagues() {
-        Object u = FacesUtil.getCurrentUserDTO();
-        if (u instanceof PlayerDTO) {
-            return leagueService.getEnroledLeagues((PlayerDTO) u);
-        }
-
-        return new ArrayList<LeagueDTO>();
-    }
 
     public String leagueDetail(LeagueDTO dto) {
         currentLeagueMatches = leagueService.getMatches(dto);
