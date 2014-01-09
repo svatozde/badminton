@@ -6,11 +6,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:sec="http://www.springframework.org/security/facelets/tags">
     <h:head>
-        <title>KOS</title>
+        <title>#{msgs.league_detail}</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
-            <ui:param name="pageTitle" value="#{msgs.students}" />
+            <ui:param name="pageTitle" value="#{msgs.league_detail}" />
             <ui:define name="content">
                 <h:form>
                     <h:dataTable value="#{leagueList.allLeagues}" var="item" styleClass="dataTable">
