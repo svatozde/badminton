@@ -30,6 +30,7 @@
                     <li><h:link outcome="place" value="#{msgs.placeCreate}" /></li>
                     <li><h:link outcome="league" value="#{msgs.leagueCreate}" /></li>
                     <li><h:link outcome="leagues" value="#{msgs.leagues}" /></li>
+                    <li><h:link outcome="userDetail" value="#{msgs.editUser}" /></li>
                 </sec:isAuthenticated>
                 <sec:ifNotGranted roles="ROLE_PLAYER" >
                     <li><h:link outcome="signin" value="#{msgs.signin}" /></li>

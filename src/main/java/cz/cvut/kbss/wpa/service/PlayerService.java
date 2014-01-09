@@ -13,4 +13,8 @@ public interface PlayerService {
     
     @Transactional
     public void createPlayer(PlayerDTO player);
+    
+    @Transactional
+    public void updatePlayer(PlayerDTO player);
+    
 }

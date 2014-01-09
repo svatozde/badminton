@@ -46,6 +46,9 @@ public class UserServiceImpl implements UserService, Serializable {
            PlayerDTO pdto = new PlayerDTO();
            pdto.setName(p.getName());
            pdto.setSurname(p.getSurname());
+           pdto.setWeigth(p.getWeigth());
+           pdto.setHeight(p.getHeight());
+           pdto.setDateOfBirth(p.getDateOfBirth());
            dto = pdto;
         }else{
             dto = new UserDTO();
