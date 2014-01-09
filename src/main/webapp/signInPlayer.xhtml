@@ -6,13 +6,13 @@
       xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Student</title>
+        <title>#{msgs.player_create_title}</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
-            <ui:param name="pageTitle" value="#{msgs.student_edit_title}" />
+            <ui:param name="pageTitle" value="#{msgs.player_create_title}" />
             <ui:define name="content">
-                <h1>Student</h1>
+                <h1>#{msgs.player_create_title}</h1>
                 <h:form>
                     <h:panelGrid columns="3" columnClasses="dataLabel,,">
                         <h:outputText value="#{msgs.username}:" />
