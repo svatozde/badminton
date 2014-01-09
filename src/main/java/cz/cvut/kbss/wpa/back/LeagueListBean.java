@@ -16,6 +16,7 @@ import cz.cvut.kbss.wpa.security.CurrentUserDetails;
 import cz.cvut.kbss.wpa.service.LeagueService;
 import cz.cvut.kbss.wpa.service.ProposalService;
 import cz.cvut.kbss.wpa.service.ScoreService;
+import cz.cvut.kbss.wpa.support.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,9 +145,11 @@ public class LeagueListBean implements Serializable {
     }
 
     private void refresh() {
+         
+        CurrentUserDetails u = (CurrentUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!(u.getUserDto() instanceof  PlayerDTO)) return;
         proposal = new ProposalDTO();
         proposal.setMatch(currentMatch);
-        CurrentUserDetails u = (CurrentUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         proposal.setPlayer((PlayerDTO) u.getUserDto());
         set = new SetDTO();
         set.setNumber(currentMatch.getSets().size() + 1);
@@ -208,17 +211,23 @@ public class LeagueListBean implements Serializable {
 
     public String showMatchDetail(MatchDTO m) {
         setCurrentMatch(m);
-        refresh();
-        proposal.setMatch(m);
+        refresh();      
         return "matchDetail";
     }
 
     public List<LeagueDTO> getAllLeagues() {
-        return leagueService.getAllLeagues();
+        List<LeagueDTO> all = leagueService.getAllLeagues();
+        Object u = FacesUtil.getCurrentUserDTO();
+        if (u instanceof PlayerDTO) {
+            List<LeagueDTO> ens = leagueService.getEnroledLeagues((PlayerDTO) u);
+            all.removeAll(ens);
+        }
+        
+        return all;
     }
 
     public List<LeagueDTO> getEnrolledLeagues() {
-        Object u = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object u = FacesUtil.getCurrentUserDTO();
         if (u instanceof PlayerDTO) {
             return leagueService.getEnroledLeagues((PlayerDTO) u);
         }
@@ -242,6 +251,7 @@ public class LeagueListBean implements Serializable {
     }
 
     public void startLeague(LeagueDTO dto) {
+        dto.setStarted(true);
         leagueService.startLeague(dto);
     }
 
@@ -250,10 +260,10 @@ public class LeagueListBean implements Serializable {
      */
     public List<LeagueDTO> getEnroledLeagues() {
         Object u = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (u instanceof CurrentUserDetails) {
-            PlayerDTO dto = (PlayerDTO) ((CurrentUserDetails) u).getUserDto();
-            return leagueService.getEnroledLeagues(dto);
+        if (u instanceof PlayerDTO) {
+            return leagueService.getEnroledLeagues((PlayerDTO) u);
         }
+
         return new ArrayList<LeagueDTO>();
     }
 

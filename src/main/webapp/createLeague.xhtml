@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
     <h:head>
         <title>Vytvoreni Ligy</title>
     </h:head>
@@ -19,10 +20,19 @@
                         <h:message for="bn" errorClass="errorRequired"/>
 
                         <h:outputText value="#{msgs.possiblePlaces}:" />
-                        <h:selectManyListbox id="enrolledIn" value="#{league.league.possiblePlaces}" label="#{msgs.enrolled_in}" converter="placeConv">
+                        <h:selectManyListbox id="pp" value="#{league.league.possiblePlaces}" label="#{msgs.enrolled_in}" converter="placeConv">
                             <f:selectItems value="#{place.allPlaces}" />
                         </h:selectManyListbox>
-                        <h:message for="enrolledIn" />
+                        <h:message for="pp" />
+                        
+                        <h:outputText value="#{msgs.startDate}"/>
+                        <rich:calendar id="sd" value="#{league.league.leagueStart}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
+                        <h:message for="sd" />
+                        
+                        <h:outputText value="#{msgs.endDate}"/>
+                        <rich:calendar id="sd" value="#{league.league.leagueEnd}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
+                        <h:message for="sd" />
+                       
                     </h:panelGrid>
                     <h:commandButton type="submit" value="#{msgs.save}" action="#{league.createLeague()}"/>
                     <h:messages globalOnly="true"/>

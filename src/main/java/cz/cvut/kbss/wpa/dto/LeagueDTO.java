@@ -24,6 +24,7 @@ public class LeagueDTO extends AbstractDTO {
     private String name;
     private Date leagueStart;
     private Date leagueEnd;
+    private boolean started;
 
     public LeagueDTO() {
 
@@ -111,6 +112,20 @@ public class LeagueDTO extends AbstractDTO {
      */
     public MatchDTO[][] getMatches() {
         return matches;
+    }
+
+    /**
+     * @return the started
+     */
+    public boolean isStarted() {
+        return started;
+    }
+
+    /**
+     * @param started the started to set
+     */
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 
 }

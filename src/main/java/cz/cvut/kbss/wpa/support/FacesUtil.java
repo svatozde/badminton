@@ -4,15 +4,23 @@
  */
 package cz.cvut.kbss.wpa.support;
 
+import cz.cvut.kbss.wpa.dto.UserDTO;
+import cz.cvut.kbss.wpa.security.CurrentUserDetails;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class FacesUtil {
 
+    public static UserDTO getCurrentUserDTO(){
+             CurrentUserDetails cu = (CurrentUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+             return cu.getUserDto();
+    }
+   
     public static String getRequestParameter(String name) {
         return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
     }

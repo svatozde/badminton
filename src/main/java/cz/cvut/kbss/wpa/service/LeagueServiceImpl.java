@@ -125,11 +125,14 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
     private LeagueDTO remapLeague(League l) {
         LeagueDTO ldto = new LeagueDTO();
 
+        ldto.setStarted(!l.getMatches().isEmpty());
+        
         ldto.setName(l.getName());
         ldto.setId(l.getId());
 
         List<PlaceDTO> places = new ArrayList<PlaceDTO>();
         ldto.setPossiblePlaces(places);
+        
         for (Place p : l.getAllowedPlaces()) {
             places.add(mapPlace(p));
         }

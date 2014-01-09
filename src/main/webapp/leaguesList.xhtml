@@ -26,9 +26,11 @@
                         <h:column>
                             <h:commandButton value="#{msgs.enrollin}" action="#{leagueList.enroll(item)}" />
                         </h:column>
+                        <sec:ifAllGranted roles="ROLE_ADMIN"> 
                             <h:column>
-                                <h:commandButton value="#{msgs.start}" action="#{leagueList.startLeague(item)}" />
+                                <h:commandButton value="#{msgs.start}" action="#{leagueList.startLeague(item)}"  rendered="#{not item.started}"/>
                             </h:column>
+                        </sec:ifAllGranted>
                     </h:dataTable>
                     <h:messages />
                 </h:form>
