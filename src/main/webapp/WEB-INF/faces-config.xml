@@ -42,6 +42,10 @@
             <from-outcome>leagues</from-outcome>
             <to-view-id>/leaguesList.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>userDetail</from-outcome>
+            <to-view-id>/userDetail.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/createPlace.xhtml</from-view-id>
