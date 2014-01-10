@@ -26,8 +26,9 @@ public class MatchDateValidator implements Validator{
 
     public void validate(FacesContext fc, UIComponent uic, Object o) throws ValidatorException {
         Date d = (Date) o;
-        if(d.after(new Date()))
+        if(d.before(new Date())) {
             throw new ValidatorException(new FacesMessage(FacesUtil.getMessage("wrongPropDate")));
+        }
                 
     }
     

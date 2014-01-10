@@ -251,9 +251,9 @@ public class LeagueListBean implements Serializable {
      * @return the enroledLeagues
      */
     public List<LeagueDTO> getEnroledLeagues() {
-        Object u = FacesUtil.getCurrentUserDTO();
-        if (u instanceof PlayerDTO) {
-            return leagueService.getEnroledLeagues((PlayerDTO) u);
+        CurrentUserDetails u = (CurrentUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (u.getUserDto() instanceof PlayerDTO) {
+            return leagueService.getEnroledLeagues((PlayerDTO) u.getUserDto());
         }
 
         return new ArrayList<LeagueDTO>();

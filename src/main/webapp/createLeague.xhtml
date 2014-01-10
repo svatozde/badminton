@@ -10,7 +10,7 @@
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
-            <ui:param name="pageTitle" value="#{msgs.student_edit_title}" />
+            <ui:param name="pageTitle" value="#{msgs.league_create_title}" />
             <ui:define name="content">
                 <h1>Vytvoreni Ligy</h1>
                 <h:form>
@@ -20,10 +20,10 @@
                         <h:message for="bn" errorClass="errorRequired"/>
 
                         <h:outputText value="#{msgs.possiblePlaces}:" />
-                        <h:selectManyListbox id="pp" value="#{league.league.possiblePlaces}" label="#{msgs.enrolled_in}" converter="placeConv">
+                        <h:selectManyListbox id="pp" value="#{league.league.possiblePlaces}" label="#{msgs.enrolled_in}" converter="placeConv" required="true" requiredMessage="#{msgs.required_message}">
                             <f:selectItems value="#{place.allPlaces}" />
                         </h:selectManyListbox>
-                        <h:message for="pp" />
+                        <h:message for="pp" errorClass="errorRequired"/>
                         
                         <h:outputText value="#{msgs.startDate}"/>
                         <rich:calendar id="sd" value="#{league.league.leagueStart}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
