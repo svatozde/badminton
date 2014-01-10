@@ -30,8 +30,8 @@
                         <h:message for="sd" />
                         
                         <h:outputText value="#{msgs.endDate}"/>
-                        <rich:calendar id="sd" value="#{league.league.leagueEnd}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
-                        <h:message for="sd" />
+                        <rich:calendar id="ed" value="#{league.league.leagueEnd}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
+                        <h:message for="ed" />
                        
                     </h:panelGrid>
                     <h:commandButton type="submit" value="#{msgs.save}" action="#{league.createLeague()}"/>

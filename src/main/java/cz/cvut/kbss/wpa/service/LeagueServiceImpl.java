@@ -6,6 +6,7 @@
 package cz.cvut.kbss.wpa.service;
 
 import cz.cvut.kbss.wpa.dao.GenericDAOIface;
+import cz.cvut.kbss.wpa.dto.EnrollDTO;
 import cz.cvut.kbss.wpa.dto.EnrollUserDTO;
 import cz.cvut.kbss.wpa.dto.LeagueDTO;
 import cz.cvut.kbss.wpa.dto.MatchDTO;
@@ -70,7 +71,7 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
 
     public void startLeague(LeagueDTO league) {
         League l = genericDAOIface.getById(league.getId(), League.class);
-        if (l.getStart() != null) {
+        if (l.getMatches() != null && !l.getMatches().isEmpty()) {
             return;
         }
         List<Enroll> es = l.getEnrolls();
@@ -136,9 +137,33 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
         for (Place p : l.getAllowedPlaces()) {
             places.add(mapPlace(p));
         }
+        java.util.Set<PlayerDTO> ps = new HashSet<PlayerDTO>();
+        for (Match m : l.getMatches()) {
+            for (Note n : m.getNotes()) {
+                Player p = n.getPlayer();
+                ps.add(remapPlayer(p));
+            }     
+        }
+        
+        
+        List<EnrollDTO> es = new ArrayList<EnrollDTO>();
+        for(Enroll e : l.getEnrolls()){
+            PlayerDTO p = remapPlayer(e.getPlayer());
+            EnrollDTO en = new EnrollDTO();
+            en.setId(e.getId());
+            en.setPlayer(p);
+            en.setLeague(ldto);
+            es.add(en);
+        }
+        ldto.setEnrolls(es);
+        
+       
+        
         return ldto;
 
     }
+    
+    
 
     private PlaceDTO mapPlace(Place p) {
         PlaceDTO ret = new PlaceDTO();

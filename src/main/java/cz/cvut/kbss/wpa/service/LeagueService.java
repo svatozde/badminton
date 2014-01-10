@@ -24,7 +24,7 @@ public interface LeagueService {
     @Transactional
     public void createLeague(LeagueDTO league);
 
-    
+    @Secured({"ROLE_ADMIN"})
     @Transactional
     public void startLeague(LeagueDTO league);
 
