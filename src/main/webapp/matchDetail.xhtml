@@ -94,7 +94,7 @@
                         <c:if test="#{leagueList.checkIfCanPropose()}">
                             <div class="proposalcard">
                                 <h:form>
-                                    <rich:dataTable value="#{leagueList.currentMatch.proposals1}" var="item" styleClass="dataTable">
+                                    <rich:dataTable value="#{leagueList.getPlayer1Proposals()}" var="item" styleClass="dataTable">
                                         <f:facet name="caption">
                                             <h:outputText value="#{msgs.proposals}"/>
                                         </f:facet>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="proposalcard">
                                 <h:form>
-                                    <rich:dataTable value="#{leagueList.currentMatch.proposals2}" var="item" styleClass="dataTable">
+                                    <rich:dataTable value="#{leagueList.getPlayer2Proposals()}" var="item" styleClass="dataTable">
                                         <f:facet name="caption">
                                             <h:outputText value="#{msgs.proposals}"/>
                                         </f:facet>

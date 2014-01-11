@@ -224,7 +224,7 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
         ret.setProposals2(pr2);
         ret.setProposals1(pr1);
         for (Proposal p : m.getProposals()) {
-            if (p.getPlayer().getId().equals(ns.get(0).getPlayer())) {
+            if (p.getPlayer().getId() == ns.get(0).getPlayer().getId()) {
                 pr1.add(remapProposal(p));
 
             } else {
