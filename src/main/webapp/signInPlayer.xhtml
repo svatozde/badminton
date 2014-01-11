@@ -21,9 +21,9 @@
                         </h:inputText>
                         <h:message for="un" errorClass="errorRequired"/>
 
-                        <h:outputText value="#{msgs.password}:" rendered="#{students.student.id == null}"/>
-                        <h:inputSecret value="#{player.player.password}" id="pw" label="#{msgs.password}" required="true" requiredMessage="#{msgs.required_message}" rendered="#{students.student.id == null}"/>
-                        <h:message for="pw" errorClass="errorRequired" rendered="#{students.student.id == null}"/>
+                        <h:outputText value="#{msgs.password}:" rendered="true"/>
+                        <h:inputSecret value="#{player.player.password}" id="pw" label="#{msgs.password}" required="true" requiredMessage="#{msgs.required_message}" rendered="true"/>
+                        <h:message for="pw" errorClass="errorRequired" rendered="true"/>
 
                         <h:outputText value="#{msgs.firstname}:" />
                         <h:inputText value="#{player.player.name}" id="fn" label="#{msgs.firstname}" required="true" requiredMessage="#{msgs.required_message}">

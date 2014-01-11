@@ -7,11 +7,11 @@
       xmlns:sec="http://www.springframework.org/security/facelets/tags"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
-        <title>KOS</title>
+        <title>#{msgs.league_detail}</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
-            <ui:param name="pageTitle" value="#{msgs.students}" />
+            <ui:param name="pageTitle" value="#{msgs.league_detail}" />
             <ui:define name="content">
                 <c:if test="#{not leagueList.currentLeagueMatches.started}">
                     <h:dataTable value="#{leagueList.currentLeagueMatches.enrolls}" var="item" styleClass="dataTable">
