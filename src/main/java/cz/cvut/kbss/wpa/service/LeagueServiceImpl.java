@@ -196,6 +196,10 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
         MatchDTO ret = new MatchDTO();
         ret.setId(m.getId());
         List<Note> ns = m.getNotes();
+        if (ns.size() != 2)
+        {
+            throw new RuntimeException("Match " + m.getId() + "does not have 2 players");
+        }
         ret.setPlayer1(remapPlayer(ns.get(0).getPlayer()));
         ret.setPlayer2(remapPlayer(ns.get(1).getPlayer()));
 
