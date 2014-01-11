@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.cvut.kbss.wpa.back;
 
 import cz.cvut.kbss.wpa.dto.PlayerDTO;
