@@ -31,4 +31,8 @@ public interface ScoreService {
     @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
     @Transactional
     public void updateSet(MatchDTO m, SetDTO s);
+    
+    @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
+    @Transactional
+    public void deleteSet(MatchDTO m, SetDTO s);
 }

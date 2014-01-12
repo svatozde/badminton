@@ -65,7 +65,7 @@ public class LeagueListBean implements Serializable {
     
     public void deleteSet(SetDTO setDto)
     {
-        
+        scoreService.deleteSet(currentMatch, setDto);
     }
 
     public void update(SetDTO dto) {
@@ -86,14 +86,6 @@ public class LeagueListBean implements Serializable {
         for (SetDTO s : currentMatch.getSets()) {
             s.setEditable(false);
         }
-    }
-
-    public void listener1(AjaxBehaviorEvent e) {
-        System.out.println("Made it!");
-    }
-
-    public void listener2(AjaxBehaviorEvent e) {
-        System.out.println("Made it!");
     }
 
     public boolean isMatchAgerrd() {

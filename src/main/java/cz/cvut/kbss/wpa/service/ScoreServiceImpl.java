@@ -7,12 +7,15 @@ package cz.cvut.kbss.wpa.service;
 
 import cz.cvut.kbss.wpa.dao.GenericHibernateJpaDAO;
 import cz.cvut.kbss.wpa.dto.MatchDTO;
+import cz.cvut.kbss.wpa.dto.ProposalDTO;
 import cz.cvut.kbss.wpa.dto.SetDTO;
 import cz.cvut.kbss.wpa.model.Match;
 import cz.cvut.kbss.wpa.model.Note;
+import cz.cvut.kbss.wpa.model.Proposal;
 import cz.cvut.kbss.wpa.model.Set;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +65,7 @@ public class ScoreServiceImpl implements ScoreService, Serializable {
                 genericHybernateJpaDAO.remove(s);
             }
         }
+        m.setSets(new ArrayList<SetDTO>());
     }
     
     public void addSet(MatchDTO m, SetDTO s) {
@@ -139,9 +143,52 @@ public class ScoreServiceImpl implements ScoreService, Serializable {
        
     }
     
-    public void deleteSet(SetDTO setDto)
-    {
-        
+    public void deleteSet(MatchDTO m, SetDTO s) {
+       Match ma = genericHybernateJpaDAO.getById(m.getId(), Match.class);
+       for(Note n: ma.getNotes()){
+           deleteSet(s, n.getSets());
+       }
+       remapSets(ma,m);      
+    }
+    private void remapSets(Match m,MatchDTO ret) {
+        List<Note> ns = m.getNotes();
+        if (ns.size() != 2)
+        {
+            throw new RuntimeException("Match " + m.getId() + "does not have 2 players");
+        }
+       
+        List<Set> s1 = ns.get(0).getSets();
+        List<Set> s2 = ns.get(1).getSets();
+
+        Collections.sort(s2, new SetComparator());
+        Collections.sort(s1, new SetComparator());
+
+        List<SetDTO> ss = new ArrayList<SetDTO>();
+        for (int i = 0; i < s1.size(); i++) {
+            SetDTO sDto = new SetDTO();
+            sDto.setNumber(s1.get(i).getNumber());
+            sDto.setScore1(s1.get(i).getScore());
+            sDto.setScore2(s2.get(i).getScore());
+            ss.add(sDto);
+        }
+        ret.setSets(ss);      
+    }
+    private void deleteSet(SetDTO s, List<Set> ss){
+       
+        boolean renum = false;
+        for(int i = 0; i< ss.size(); i++){
+            Set set = ss.get(i);
+            if(set.getNumber() == s.getNumber()){
+                genericHybernateJpaDAO.remove(set);
+                ss.remove(set);
+            }
+        }
+        Collections.sort(ss, new SetComparator());
+        for(int i=0; i < ss.size(); i++){
+            Set set = ss.get(i);
+            set.setNumber(i+1);
+            genericHybernateJpaDAO.saveOrUpdate(set);
+        }
     }
 
     /**
@@ -157,6 +204,12 @@ public class ScoreServiceImpl implements ScoreService, Serializable {
     public void setGenericHybernateJpaDAO(GenericHibernateJpaDAO genericHybernateJpaDAO) {
         this.genericHybernateJpaDAO = genericHybernateJpaDAO;
     }
+
+    private ProposalDTO remapProposal(Proposal p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
     
 

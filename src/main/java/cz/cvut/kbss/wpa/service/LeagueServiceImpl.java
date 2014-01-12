@@ -308,13 +308,6 @@ public class LeagueServiceImpl implements LeagueService, Serializable {
         }
     }
 
-    private class SetComparator implements Comparator<Set> {
-
-        public int compare(Set o1, Set o2) {
-            return o1.getNumber() - o2.getNumber();
-        }
-    }
-
     private class PlayerPair {
 
         PlayerDTO p1;
