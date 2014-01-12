@@ -138,6 +138,19 @@ public class LeagueListBean implements Serializable {
         proposalService.createProposal(proposal);
         refresh();
     }
+    
+    public void deleteProposal(ProposalDTO p) 
+    {
+        if ((proposal != null) && (proposal.getId() == p.getId())) {
+            return;
+        }
+        //najit kterej proposal to je
+        List<ProposalDTO> props1 = currentMatch.getProposals1();
+        List<ProposalDTO> props2 = currentMatch.getProposals2();
+        props1.remove(p);
+        props2.remove(p);
+        proposalService.deleteProposal(p);
+    }  
 
     private void refresh() {
          

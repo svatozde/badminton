@@ -45,7 +45,10 @@ public class ProposalServiceImpl implements ProposalService, Serializable {
        genericHibernateJpaDAO.saveOrUpdate(pr);
        p.setAgreed(Boolean.TRUE);
     }
-    
+
+    public void deleteProposal(ProposalDTO p) {
+        genericHibernateJpaDAO.removeById(p.getId(), Proposal.class);
+    }
     
     
 }

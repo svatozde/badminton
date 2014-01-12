@@ -122,6 +122,7 @@
                                         </rich:column>
                                         <rich:column>
                                             <h:commandButton value="accept" rendered="#{leagueList.player2}" action="#{leagueList.agreeProposal(item)}"/>
+                                            <h:commandButton type="submit" value="delete" rendered="#{leagueList.player1}" action="#{leagueList.deleteProposal(item)}"/>
                                             <f:facet name="footer" rendered="#{leagueList.player1}">
                                                 <h:commandButton type="submit" value="create" rendered="#{leagueList.player1}" action="#{leagueList.createProposal1()}" />
                                             </f:facet>
@@ -160,6 +161,7 @@
                                         </rich:column>
                                         <rich:column>
                                             <h:commandButton value="accept" rendered="#{leagueList.player1}" action="#{leagueList.agreeProposal(item)}"/>
+                                            <h:commandButton type="ssubmit" value="delete" rendered="#{leagueList.player2}" action="#{leagueList.deleteProposal(item)}"/>
                                             <f:facet name="footer" rendered="#{leagueList.player2}">
                                                 <h:commandButton type="submit" value="create" rendered="#{leagueList.player2}" action="#{leagueList.createProposal2()}" />
                                             </f:facet>

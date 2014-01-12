@@ -23,4 +23,8 @@ public interface ProposalService {
     @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
     @Transactional
     public void agreedProposal(ProposalDTO p);
+    
+    @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
+    @Transactional
+    public void deleteProposal(ProposalDTO p);
 }
