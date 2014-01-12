@@ -69,10 +69,11 @@
                                         <h:column rendered="#{leagueList.checkIfCanAddScore()}">
                                             <h:commandButton value="#{msgs.edit}" action="#{leagueList.setEditable(item)}" rendered="#{not item.editable}"/>
                                             <h:commandButton value="#{msgs.save}" action="#{leagueList.update(item)}" rendered="#{item.editable}"/>
+                                            <h:commandButton value="#{msgs.delete}" action="#{leagueList.deleteSet(item)}" rendered="#{not item.editable}"/>
                                             <f:facet name="footer">
                                                 <h:commandButton value="#{msgs.add}" action="#{leagueList.addSet()}" rendered="#{not leagueList.edit}"/>
                                             </f:facet>
-                                        </h:column>                         
+                                        </h:column>
                                     </h:dataTable>
                                 </h:form>
 

@@ -62,6 +62,11 @@ public class LeagueListBean implements Serializable {
         set.setNumber(currentMatch.getSets().size() + 1);
 
     }
+    
+    public void deleteSet(SetDTO setDto)
+    {
+        
+    }
 
     public void update(SetDTO dto) {
         scoreService.updateSet(currentMatch, dto);

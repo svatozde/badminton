@@ -138,6 +138,11 @@ public class ScoreServiceImpl implements ScoreService, Serializable {
         }
        
     }
+    
+    public void deleteSet(SetDTO setDto)
+    {
+        
+    }
 
     /**
      * @return the genericHybernateJpaDAO
