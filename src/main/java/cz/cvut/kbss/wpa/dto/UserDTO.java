@@ -6,7 +6,11 @@
 
 package cz.cvut.kbss.wpa.dto;
 
+import cz.cvut.kbss.wpa.exceptions.ExceptionCodes;
+import cz.cvut.kbss.wpa.exceptions.PlayerServiceException;
+import cz.cvut.kbss.wpa.exceptions.UserServiceException;
 import cz.cvut.kbss.wpa.provider.HashProvider;
+import cz.cvut.kbss.wpa.service.aspects.anotations.Validate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +21,10 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
  *
  * @author jan
  */
+@Validate(exceptionClass = UserServiceException.class,code = ExceptionCodes.EXP02)
 public class UserDTO extends AbstractDTO{
     
+ 
     protected String username;
     protected String password;
     

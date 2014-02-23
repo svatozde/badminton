@@ -8,10 +8,12 @@ package cz.cvut.kbss.wpa.back;
 
 import cz.cvut.kbss.wpa.dto.AdminDTO;
 import cz.cvut.kbss.wpa.dto.PlayerDTO;
+import cz.cvut.kbss.wpa.dto.PlayerUpdateDTO;
 import cz.cvut.kbss.wpa.dto.UserDTO;
 import cz.cvut.kbss.wpa.security.CurrentUserDetails;
-import cz.cvut.kbss.wpa.service.AdminService;
-import cz.cvut.kbss.wpa.service.PlayerService;
+import cz.cvut.kbss.wpa.service.api.AdminService;
+import cz.cvut.kbss.wpa.service.api.PlayerService;
+import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @author jan
  */
 @Component("editUser")
-@Scope("request")
+@ViewScoped
 public class EditUserBean {
     
     @Autowired
@@ -30,6 +32,8 @@ public class EditUserBean {
     
     @Autowired
     private AdminService adminService;
+    
+    private PlayerUpdateDTO uPlayer;
     
     private PlayerDTO player;
     
@@ -62,7 +66,7 @@ public class EditUserBean {
     public void save()
     {
         if (player != null) {
-            playerService.updatePlayer(player);
+            playerService.updatePlayer(uPlayer);
         }
         if (admin != null) {
             adminService.updateAdmin(admin);

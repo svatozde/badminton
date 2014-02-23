@@ -6,10 +6,12 @@
 
 package cz.cvut.kbss.wpa.back;
 
+import cz.cvut.kbss.wpa.dto.PlayerCreateDTO;
 import cz.cvut.kbss.wpa.dto.PlayerDTO;
-import cz.cvut.kbss.wpa.service.PlayerService;
-import cz.cvut.kbss.wpa.service.UserService;
+import cz.cvut.kbss.wpa.service.api.PlayerService;
+import cz.cvut.kbss.wpa.service.api.UserService;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -22,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @author zdeněk
  */
 @Component("player")
-@Scope("request")
+@RequestScoped
 public class PlayerBean {
     
     @Autowired
@@ -31,7 +33,7 @@ public class PlayerBean {
     @Autowired
     private UserService userService;
     
-    private PlayerDTO player = new PlayerDTO();
+    private PlayerCreateDTO player = new PlayerCreateDTO();
     
     public void save(){
         playerService.createPlayer(player);
@@ -69,14 +71,14 @@ public class PlayerBean {
     /**
      * @return the player
      */
-    public PlayerDTO getPlayer() {
+    public PlayerCreateDTO getPlayer() {
         return player;
     }
 
     /**
      * @param player the player to set
      */
-    public String setPlayer(PlayerDTO player) {
+    public String setPlayer(PlayerCreateDTO player) {
         this.player = player;
         return "index";
     }

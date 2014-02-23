@@ -12,15 +12,19 @@
         http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
         http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd" 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd " 
        default-autowire="byType">
         
     <!-- Pro konfiguraci Spring beans budou pouzity take anotace -->
     <context:annotation-config />      
     <!-- Spring beans budou hledany v balicku cz.cvut.kbss (podpora anotaci @Component, @Repository, @Service) -->
-    <context:component-scan base-package="cz.cvut.kbss.wpa"/>
+    <context:component-scan base-package="cz.cvut"/>
     <!-- Podpora anotace @Configurable -->
     <context:spring-configured/> 
+    
+    <aop:aspectj-autoproxy />
+ 
     <!-- Property files -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -53,12 +57,12 @@
         <property name="packagesToScan" value="cz.cvut.kbss.wpa" />
     </bean> 
     
-    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
     <!-- Podpora deklarativni demarkace transakci - anotace @Transactional-->
-    <tx:annotation-driven transaction-manager="txManager" /> 
+    <tx:annotation-driven transaction-manager="transactionManager" /> 
     
 <!--    
     

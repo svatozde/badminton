@@ -9,10 +9,10 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import javax.faces.bean.SessionScoped;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author zdeněk
  */
 @Component("language")
-@Scope("session")
+@SessionScoped
 public class LanguageBean implements Serializable {
 
     private static final long serialVersionUID = 1L;

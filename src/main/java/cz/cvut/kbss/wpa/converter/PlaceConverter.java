@@ -7,7 +7,7 @@
 package cz.cvut.kbss.wpa.converter;
 
 import cz.cvut.kbss.wpa.dto.PlaceDTO;
-import cz.cvut.kbss.wpa.service.PlaceService;
+import cz.cvut.kbss.wpa.service.api.PlaceService;
 import java.util.HashMap;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

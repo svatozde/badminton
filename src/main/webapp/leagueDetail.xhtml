@@ -4,7 +4,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:sec="http://www.springframework.org/security/facelets/tags"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>#{msgs.league_detail}</title>
@@ -13,8 +12,8 @@
         <ui:composition template="./WEB-INF/includes-templates/wpa-template.xhtml">
             <ui:param name="pageTitle" value="#{msgs.league_detail}" />
             <ui:define name="content">
-                <c:if test="#{not leagueList.currentLeagueMatches.started}">
-                    <h:dataTable value="#{leagueList.currentLeagueMatches.enrolls}" var="item" styleClass="dataTable">
+                <c:if test="#{not leagueDetail.currentLeagueMatches.started}">
+                    <h:dataTable value="#{leagueDetail.currentLeagueMatches.enrolls}" var="item" styleClass="dataTable">
                          <f:facet name="caption">
                             <h:outputText value="#{msgs.enrolledPlayers}"/>
                         </f:facet>
@@ -23,14 +22,14 @@
                         </h:column>
                     </h:dataTable>
                 </c:if>
-                <c:if test="#{leagueList.currentLeagueMatches.started}">
+                <c:if test="#{leagueDetail.currentLeagueMatches.started}">
                     <h:form>
                         <TABLE class="table">
                             <tbody>
                                 <tr>
                                     <td class="tableCell">
                                     </td>   
-                                    <ui:repeat value="#{leagueList.currentLeagueMatches.players}" var="p">
+                                    <ui:repeat value="#{leagueDetail.currentLeagueMatches.players}" var="p">
                                         <td class="tableCell">
                                             <h4>
                                                 #{p.getName()}<br/>
@@ -39,18 +38,18 @@
                                         </td>
                                     </ui:repeat>
                                 </tr>
-                                <ui:repeat  value="#{leagueList.currentLeagueMatches.matches}" var="row" varStatus="i">
+                                <ui:repeat  value="#{leagueDetail.currentLeagueMatches.matches}" var="row" varStatus="i">
                                     <TR>
                                         <td class="tableCell">
                                             <h4>
-                                                #{leagueList.currentLeagueMatches.players[i.index].getName()}  #{leagueList.currentLeagueMatches.players[i.index].getSurname()} 
+                                                #{leagueDetail.currentLeagueMatches.players[i.index].getName()}  #{leagueList.currentLeagueMatches.players[i.index].getSurname()} 
                                             </h4>
                                         </td>
                                         <ui:repeat  value="#{row}" var="m" varStatus="j">                                      
 
-                                            <td class="#{leagueList.getStyle(i.index, j.index)}">
-                                                <h:commandLink action="#{leagueList.showMatchDetail(m)}" styleClass="tableLink">
-                                                    <h3>#{m.getScore()}</h3>
+                                            <td class="#{leagueDetail.getStyle(i.index, j.index)}">
+                                                <h:commandLink action="#{matchDetail.showMatchDetail(m,leagueDetail.currentLeagueMatches.possiblePlaces)}" styleClass="tableLink">
+                                                   #{m.getScore()}
                                                 </h:commandLink>
                                             </td> 
                                         </ui:repeat>

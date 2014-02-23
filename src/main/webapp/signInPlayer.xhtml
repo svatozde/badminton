@@ -51,7 +51,8 @@
                         <h:message for="height" errorClass="errorRequired"/>
                         
                         <h:outputText value="#{msgs.birthDate}"/>
-                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" popup="true" datePattern="dd.MM HH:mm"/>
+                        <rich:calendar id="ed" value="#{league.league.leagueEnd}" validator="matchDateValidator" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
+                        <rich:calendar id="birthDate" value="#{player.player.dateOfBirth}" datePattern="dd.MM.yyyy HH:mm" popup="true"/>
                         <h:message for="height" errorClass="errorRequired"/>
                         
                         

@@ -40,7 +40,7 @@
                             </h:inputText>
 
                             <h:outputText value="#{msgs.height}:" />
-                            <h:inputText value="#{editUser.player.height}" id="height" label="#{msgs.height}" required="false" validatorMessage="#{msgs.wrong_height}">
+                            <h:inputText  value="#{editUser.player.height}" id="height" label="#{msgs.height}" required="false" validatorMessage="#{msgs.wrong_height}">
                                 <f:validateLength minimum="2" />
                             </h:inputText>
                          </sec:ifNotGranted>   

@@ -6,9 +6,10 @@
 package cz.cvut.kbss.wpa.back;
 
 import cz.cvut.kbss.wpa.dto.PlaceDTO;
-import cz.cvut.kbss.wpa.service.PlaceService;
+import cz.cvut.kbss.wpa.service.api.PlaceService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author zdeněk
  */
 @Component("place")
-@Scope("request")
+@RequestScoped
 public class PlaceBean {
 
     @Autowired

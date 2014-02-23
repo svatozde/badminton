@@ -7,8 +7,9 @@
 package cz.cvut.kbss.wpa.back;
 
 import cz.cvut.kbss.wpa.dto.LeagueDTO;
-import cz.cvut.kbss.wpa.service.LeagueService;
-import cz.cvut.kbss.wpa.service.PlaceService;
+import cz.cvut.kbss.wpa.service.api.LeagueService;
+import cz.cvut.kbss.wpa.service.api.PlaceService;
+import javax.faces.bean.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @author zdeněk
  */
 @Component("league")
-@Scope("request")
+@RequestScoped
 public class LeagueBean {
     
     @Autowired

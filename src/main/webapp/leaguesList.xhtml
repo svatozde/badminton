@@ -21,7 +21,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msgs.leagueName}"/>
                             </f:facet>
-                            <h:commandLink action="#{leagueList.leagueDetail(item)}" value="#{item.name}" />
+                            <h:commandLink action="#{leagueDetail.leagueDetail(item)}" value="#{item.name}" />
                         </h:column>
                         <h:column>
                             <h:commandButton value="#{msgs.enrollin}" action="#{leagueList.enroll(item)}" />
@@ -43,7 +43,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msgs.leagueName}"/>
                             </f:facet>
-                            <h:commandLink action="#{leagueList.leagueDetail(item)}" value="#{item.name}" />
+                            <h:commandLink action="#{leagueDetail.leagueDetail(item)}" value="#{item.name}" />
                         </h:column>
                     </h:dataTable>
                     <h:messages />

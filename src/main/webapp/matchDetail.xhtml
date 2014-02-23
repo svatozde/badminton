@@ -27,19 +27,19 @@
                                 <h:outputText value="#{msgs.player1}"/>                                      
                             </f:facet>
                             <h:outputText value="#{msgs.firstname}"/>
-                            <h:outputText value="#{leagueList.currentMatch.player1.name}"/>
+                            <h:outputText value="#{matchDetail.currentMatch.player1.name}"/>
                             <h:outputText value="#{msgs.surname}"/>
-                            <h:outputText value="#{leagueList.currentMatch.player1.surname}"/>
+                            <h:outputText value="#{matchDetail.currentMatch.player1.surname}"/>
                             <h:outputText value="#{msgs.birthnumber}"/>
-                            <h:outputText value="#{leagueList.currentMatch.player1.dateOfBirth}"/>                          
+                            <h:outputText value="#{matchDetail.currentMatch.player1.dateOfBirth}"/>                          
                         </h:panelGrid>
                     </div>
                     <div id="middle" class="playerMatchCard">
-                        <c:if test="#{leagueList.matchAgerrd}">
+                        <c:if test="#{matchDetail.matchAgerrd}">
                             <center>
-                                <center><h1>#{leagueList.currentMatch.score}</h1></center>
+                                <center><h1>#{matchDetail.currentMatch.score}</h1></center>
                                 <h:form>
-                                    <h:dataTable id="sets" value="#{leagueList.currentMatch.sets}" var="item"  styleClass="scoreDataTable">
+                                    <h:dataTable id="sets" value="#{matchDetail.currentMatch.sets}" var="item"  styleClass="scoreDataTable">
                                         <h:column>
                                             <f:facet name = "header">
                                                 <h:outputText value="#{msgs.setNum}"/>
@@ -53,7 +53,7 @@
                                             <h:outputText value="#{item.score1}" rendered="#{not item.editable}"/>
                                             <h:inputText value="#{item.score1}" rendered="#{item.editable}" styleClass="tableInput"/>
                                             <f:facet name = "footer">
-                                                <h:inputText value="#{leagueList.set.score1}" rendered="#{not leagueList.edit and leagueList.checkIfCanAddScore()}" styleClass="tableInput"/>
+                                                <h:inputText value="#{matchDetail.set.score1}" rendered="#{not matchDetail.edit and matchDetail.checkIfCanAddScore()}" styleClass="tableInput"/>
                                             </f:facet>
                                         </h:column>
                                         <h:column>
@@ -63,15 +63,15 @@
                                             <h:outputText value="#{item.score2}" rendered="#{not item.editable}"/>
                                             <h:inputText value="#{item.score2}" rendered="#{item.editable}" styleClass="tableInput"/>
                                             <f:facet name = "footer">
-                                                <h:inputText value="#{leagueList.set.score2}" rendered="#{not leagueList.edit and leagueList.checkIfCanAddScore()}" styleClass="tableInput"/>
+                                                <h:inputText value="#{matchDetail.set.score2}" rendered="#{not matchDetail.edit and matchDetail.checkIfCanAddScore()}" styleClass="tableInput"/>
                                             </f:facet>
                                         </h:column>
-                                        <h:column rendered="#{leagueList.checkIfCanAddScore()}">
-                                            <h:commandButton value="#{msgs.edit}" action="#{leagueList.setEditable(item)}" rendered="#{not item.editable}"/>
-                                            <h:commandButton value="#{msgs.save}" action="#{leagueList.update(item)}" rendered="#{item.editable}"/>
-                                            <h:commandButton value="#{msgs.delete}" action="#{leagueList.deleteSet(item)}" rendered="#{not item.editable}"/>
+                                        <h:column rendered="#{matchDetail.checkIfCanAddScore()}">
+                                            <h:commandButton value="#{msgs.edit}" action="#{matchDetail.setEditable(item)}" rendered="#{not item.editable}"/>
+                                            <h:commandButton value="#{msgs.save}" action="#{matchDetail.update(item)}" rendered="#{item.editable}"/>
+                                            <h:commandButton value="#{msgs.delete}" action="#{matchDetail.deleteSet(item)}" rendered="#{not item.editable}"/>
                                             <f:facet name="footer">
-                                                <h:commandButton value="#{msgs.add}" action="#{leagueList.addSet()}" rendered="#{not leagueList.edit}"/>
+                                                <h:commandButton value="#{msgs.add}" action="#{matchDetail.addSet()}" rendered="#{not matchDetail.edit}"/>
                                             </f:facet>
                                         </h:column>
                                     </h:dataTable>
@@ -82,20 +82,20 @@
                                         <h:outputText value="#{msgs.matchAgreed}"/>
                                     </f:facet>
                                     <h:outputText value="#{msgs.acceptedPlace}"/>
-                                    <h:outputText value="#{leagueList.agreedProposal.place.name}"/>
+                                    <h:outputText value="#{matchDetail.agreedProposal.place.name}"/>
                                     <h:outputText value="#{msgs.acceptedPlaceAdd}"/>
-                                    <h:outputText value="#{leagueList.agreedProposal.place.adress}"/>
+                                    <h:outputText value="#{matchDetail.agreedProposal.place.adress}"/>
                                     <h:outputText value="#{msgs.acceptedDate}"/>
-                                    <h:outputText value="#{leagueList.agreedProposal.propDate}">
+                                    <h:outputText value="#{matchDetail.agreedProposal.propDate}">
                                         <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeStyle="short" />
                                     </h:outputText>
                                 </h:panelGrid>
                             </center>
                         </c:if>
-                        <c:if test="#{leagueList.checkIfCanPropose()}">
+                        <c:if test="#{matchDetail.checkIfCanPropose()}">
                             <div class="proposalcard">
                                 <h:form>
-                                    <rich:dataTable value="#{leagueList.getPlayer1Proposals()}" var="item" styleClass="dataTable">
+                                    <rich:dataTable value="#{matchDetail.getPlayer1Proposals()}" var="item" styleClass="dataTable">
                                         <f:facet name="caption">
                                             <h:outputText value="#{msgs.proposals}"/>
                                         </f:facet>
@@ -104,9 +104,9 @@
                                                 <h:outputText value="#{msgs.placeName}"/>
                                             </f:facet>
                                             <h:outputText value="#{item.place.name}"/>
-                                            <f:facet name="footer" rendered="#{leagueList.player1}">
-                                                <h:selectOneMenu id="place2"  value="#{leagueList.proposal.place}"  converter="placeConv" validatorMessage="#{msgs.wrong_length}" rendered="#{leagueList.player1}">
-                                                    <f:selectItems value="#{leagueList.allPlaces}"/>
+                                            <f:facet name="footer" rendered="#{matchDetail.player1}">
+                                                <h:selectOneMenu id="place2"  value="#{matchDetail.proposal.place}"  converter="placeConv" validatorMessage="#{msgs.wrong_length}" rendered="#{matchDetail.player1}">
+                                                    <f:selectItems value="#{matchDetail.allPlaces}"/>
                                                 </h:selectOneMenu>
                                             </f:facet>
                                         </rich:column>
@@ -117,15 +117,15 @@
                                                 </h:outputText>
                                             </f:facet>
                                             <h:outputText value="#{item.propDate}"/>
-                                            <f:facet name="footer" rendered="#{leagueList.player1}">
-                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player1}" datePattern="dd.MM.yyyy HH:mm" validator="matchDateValidator" />
+                                            <f:facet name="footer" rendered="#{matchDetail.player1}">
+                                                <rich:calendar id="date2" value="#{matchDetail.proposal.propDate}" popup="true" rendered="#{matchDetail.player1}" datePattern="dd.MM.yyyy HH:mm" validator="matchDateValidator" />
                                             </f:facet>
                                         </rich:column>
                                         <rich:column>
-                                            <h:commandButton value="accept" rendered="#{leagueList.player2}" action="#{leagueList.agreeProposal(item)}"/>
-                                            <h:commandButton type="submit" value="delete" rendered="#{leagueList.player1}" action="#{leagueList.deleteProposal(item)}"/>
-                                            <f:facet name="footer" rendered="#{leagueList.player1}">
-                                                <h:commandButton type="submit" value="create" rendered="#{leagueList.player1}" action="#{leagueList.createProposal1()}" />
+                                            <h:commandButton value="accept" rendered="#{matchDetail.player2}" action="#{matchDetail.agreeProposal(item)}"/>
+                                            <h:commandButton type="submit" value="delete" rendered="#{matchDetail.player1}" action="#{matchDetail.deleteProposal(item)}"/>
+                                            <f:facet name="footer" rendered="#{matchDetail.player1}">
+                                                <h:commandButton type="submit" value="create" rendered="#{matchDetail.player1}" action="#{matchDetail.createProposal1()}" />
                                             </f:facet>
                                         </rich:column> 
                                     </rich:dataTable>
@@ -134,7 +134,7 @@
                             </div>
                             <div class="proposalcard">
                                 <h:form>
-                                    <rich:dataTable value="#{leagueList.getPlayer2Proposals()}" var="item" styleClass="dataTable">
+                                    <rich:dataTable value="#{matchDetail.getPlayer2Proposals()}" var="item" styleClass="dataTable">
                                         <f:facet name="caption">
                                             <h:outputText value="#{msgs.proposals}"/>
                                         </f:facet>
@@ -144,8 +144,8 @@
                                             </f:facet>
                                             <h:outputText value="#{item.place.name}"/>
                                             <f:facet name="footer" >
-                                                <h:selectOneMenu id="place2"  value="#{leagueList.proposal.place}"  converter="placeConv" validatorMessage="#{msgs.wrong_length}" rendered="#{leagueList.player2}">
-                                                    <f:selectItems value="#{leagueList.allPlaces}"/>
+                                                <h:selectOneMenu id="place2"  value="#{matchDetail.proposal.place}"  converter="placeConv" validatorMessage="#{msgs.wrong_length}" rendered="#{matchDetail.player2}">
+                                                    <f:selectItems value="#{matchDetail.allPlaces}"/>
                                                 </h:selectOneMenu>
                                             </f:facet>
                                         </rich:column>
@@ -157,14 +157,14 @@
                                             </f:facet>
                                             <h:outputText value="#{item.propDate}"/>
                                             <f:facet name="footer">
-                                                <rich:calendar id="date2" value="#{leagueList.proposal.propDate}" popup="true" rendered="#{leagueList.player2}" datePattern="dd.MM.yyyy HH:mm" validator="matchDateValidator"/>
+                                                <rich:calendar id="date2" value="#{matchDetail.proposal.propDate}" popup="true" rendered="#{matchDetail.player2}" datePattern="dd.MM.yyyy HH:mm" validator="matchDateValidator"/>
                                             </f:facet>
                                         </rich:column>
                                         <rich:column>
-                                            <h:commandButton value="accept" rendered="#{leagueList.player1}" action="#{leagueList.agreeProposal(item)}"/>
-                                            <h:commandButton type="ssubmit" value="delete" rendered="#{leagueList.player2}" action="#{leagueList.deleteProposal(item)}"/>
-                                            <f:facet name="footer" rendered="#{leagueList.player2}">
-                                                <h:commandButton type="submit" value="create" rendered="#{leagueList.player2}" action="#{leagueList.createProposal2()}" />
+                                            <h:commandButton value="accept" rendered="#{matchDetail.player1}" action="#{matchDetail.agreeProposal(item)}"/>
+                                            <h:commandButton type="ssubmit" value="delete" rendered="#{matchDetail.player2}" action="#{matchDetail.deleteProposal(item)}"/>
+                                            <f:facet name="footer" rendered="#{matchDetail.player2}">
+                                                <h:commandButton type="submit" value="create" rendered="#{matchDetail.player2}" action="#{matchDetail.createProposal2()}" />
                                             </f:facet>
                                         </rich:column> 
                                     </rich:dataTable>
@@ -180,17 +180,14 @@
                                 <h:outputText value="#{msgs.player2}"/>                                      
                             </f:facet>
                             <h:outputText value="#{msgs.firstname}"/>
-                            <h:outputText value="#{leagueList.currentMatch.player2.name}"/>
+                            <h:outputText value="#{matchDetail.currentMatch.player2.name}"/>
                             <h:outputText value="#{msgs.surname}"/>
-                            <h:outputText value="#{leagueList.currentMatch.player2.surname}"/>
+                            <h:outputText value="#{matchDetail.currentMatch.player2.surname}"/>
                             <h:outputText value="#{msgs.birthnumber}"/>
-                            <h:outputText value="#{leagueList.currentMatch.player2.dateOfBirth}"/>                          
+                            <h:outputText value="#{matchDetail.currentMatch.player2.dateOfBirth}"/>                          
                         </h:panelGrid>
                     </div>
                 </div>
-
-
-
             </ui:define>
         </ui:composition>
     </h:body>

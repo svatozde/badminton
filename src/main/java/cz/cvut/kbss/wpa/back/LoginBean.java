@@ -3,12 +3,13 @@ package cz.cvut.kbss.wpa.back;
 import cz.cvut.kbss.wpa.dto.PlayerDTO;
 import cz.cvut.kbss.wpa.dto.UserDTO;
 import cz.cvut.kbss.wpa.security.CurrentUserDetails;
+import javax.faces.bean.RequestScoped;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component("login")
-@Scope("request")
+@RequestScoped
 public class LoginBean {
     
     public String getLoginName() {

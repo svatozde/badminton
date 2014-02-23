@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cz.cvut.kbss.wpa.dto;
 
+import cz.cvut.kbss.wpa.exceptions.PlayerServiceException;
+import cz.cvut.kbss.wpa.exceptions.ExceptionCodes;
+import cz.cvut.kbss.wpa.service.aspects.anotations.Validate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 
@@ -16,8 +19,9 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
  *
  * @author zdeněk
  */
+@Validate(exceptionClass = PlayerServiceException.class, code = ExceptionCodes.EXP02)
 public class PlayerDTO extends UserDTO {
-    
+
     protected String name;
     protected String surname;
     protected Integer weigth;
@@ -26,10 +30,10 @@ public class PlayerDTO extends UserDTO {
     protected List<NoteDTO> notes;
     protected List<EnrollDTO> enrolls;
 
-     public PlayerDTO(){
-         super(null, null, null);
-     }
-    
+    public PlayerDTO() {
+        super(null, null, null);
+    }
+
     public PlayerDTO(Long id, String username, String password,
             String name, String surname, Integer weigth, Integer height, Date dateOfBirth, List<NoteDTO> notes, List<EnrollDTO> enrolls) {
         super(id, username, password);
@@ -40,6 +44,7 @@ public class PlayerDTO extends UserDTO {
         this.dateOfBirth = dateOfBirth;
         this.notes = notes;
         this.enrolls = enrolls;
+        BeanUtils.copyProperties(surname, height);
     }
 
     public String getName() {
@@ -97,12 +102,12 @@ public class PlayerDTO extends UserDTO {
     public void setEnrolls(List<EnrollDTO> enrolls) {
         this.enrolls = enrolls;
     }
-    
-     @Override
+
+    @Override
     public List<GrantedAuthority> getGrantedAuthorities() {
         List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-         auth.add(new GrantedAuthorityImpl("ROLE_PLAYER"));
-         return auth;
+        auth.add(new GrantedAuthorityImpl("ROLE_PLAYER"));
+        return auth;
     }
-    
+
 }
