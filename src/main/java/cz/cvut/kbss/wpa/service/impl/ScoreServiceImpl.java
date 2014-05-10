@@ -63,8 +63,9 @@ public class ScoreServiceImpl implements ScoreService, Serializable {
        
     }
 
+    @Override
     public void removeScore(MatchDTO m) {
-         Match ma = genericHybernateJpaDAO.getById(m.getId(), Match.class);
+        Match ma = genericHybernateJpaDAO.getById(m.getId(), Match.class);
         for(Note  n  : ma.getNotes()){
             for(Set s : n.getSets()){
                 genericHybernateJpaDAO.remove(s);
@@ -73,6 +74,7 @@ public class ScoreServiceImpl implements ScoreService, Serializable {
         m.setSets(new ArrayList<SetDTO>());
     }
     
+    @Override
     public void addSet(MatchDTO m, SetDTO s) {
         Match ma = genericHybernateJpaDAO.getById(m.getId(), Match.class);
         List<Note> ns =   ma.getNotes();

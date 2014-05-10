@@ -11,6 +11,7 @@ import cz.cvut.kbss.wpa.service.aspects.anotations.Validate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -19,6 +20,7 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
  *
  * @author zdeněk
  */
+@XmlRootElement
 @Validate(exceptionClass = PlayerServiceException.class, code = ExceptionCodes.EXP02)
 public class PlayerDTO extends UserDTO {
 

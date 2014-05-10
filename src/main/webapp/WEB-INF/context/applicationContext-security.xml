@@ -19,7 +19,7 @@
         <intercept-url pattern="/index.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/signInPlayer.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/rfRes/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/rest/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
           <!-- kdybychom pridali atribut requires-channel="https", vynuti to pouziti SSL -->
         <intercept-url pattern="/**" access="ROLE_PLAYER" />
         

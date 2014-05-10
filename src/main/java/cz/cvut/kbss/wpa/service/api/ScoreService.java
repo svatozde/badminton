@@ -16,9 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author zdeněk
  */
 public interface ScoreService {
-    @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
-    @Transactional
-    public void addScore(MatchDTO m);
     
     @Secured({"ROLE_PLAYER", "ROLE_ADMIN"})
     @Transactional
